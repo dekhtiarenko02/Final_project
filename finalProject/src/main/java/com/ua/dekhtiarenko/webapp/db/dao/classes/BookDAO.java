@@ -19,10 +19,6 @@ public class BookDAO implements BookDAOMethods {
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
 
-    public static void main(String[] args) {
-        BookDAO bookDAO = new BookDAO();
-        System.out.println(bookDAO.getNameOfBookById(1));
-    }
 
     @Override
     public void insertBook(Book book) {
@@ -85,7 +81,6 @@ public class BookDAO implements BookDAOMethods {
         } finally {
             closing(connection, preparedStatement, rs);
         }
-
         return bookList;
     }
 
@@ -106,6 +101,43 @@ public class BookDAO implements BookDAOMethods {
             closing(connection, preparedStatement, rs);
         }
         return id;
+    }
+
+    @Override
+    public Book getBookByName(String nameOfBook) {
+        Book book = new Book();
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.SELECT_BOOK_FROM_BOOK_BY_NAME);
+            preparedStatement.setString(1, nameOfBook);
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+            book = readingResultSet(rs);
+            }
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+        return book;
+    }
+
+    @Override
+    public void reduceBookAvailabilityById(int id_book) {
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.UPDATE_BOOK_SET_AVAILABILITY);
+            preparedStatement.setInt(1, id_book);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+    }
+
+    public static void main(String[] args) {
+        BookDAO bookDAO = new BookDAO();
     }
 
     @Override
@@ -139,5 +171,4 @@ public class BookDAO implements BookDAOMethods {
             Logger.getLogger(sqlException.getMessage());
         }
     }
-
 }

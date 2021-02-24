@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class ArrangeServlet extends HttpServlet {
 
@@ -29,6 +28,7 @@ public class ArrangeServlet extends HttpServlet {
         int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
 
         subscriptionBookDAO.insertSubscriptionBook(bookId, subscriptionId);
+        bookDAO.reduceBookAvailabilityById(bookId);
 
         req.setAttribute("id",req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);

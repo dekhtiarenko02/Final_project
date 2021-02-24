@@ -3,9 +3,12 @@ package com.ua.dekhtiarenko.webapp.db.dao.classes;
 import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAOMethods;
+import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class UserDAO implements UserDAOMethods {
@@ -62,20 +65,62 @@ public class UserDAO implements UserDAOMethods {
     }
 
     @Override
-    public User updateUser(User user) {
+    public void updateUser(User user) {
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_USER_NAME_SURNAME_PASS);
-            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(1, user.getName());
             preparedStatement.setString(2, user.getSurname());
-            preparedStatement.setString(3,user.getPassword());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setInt(4, user.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         } finally {
             closing(connection, preparedStatement, rs);
         }
-        return getUserById(user.getId());
+    }
+
+    @Override
+    public List<User> getUserList() {
+        List<User> userList = new ArrayList<>();
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.SELECT_FROM_USER);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                userList.add(readingResultSet(rs));
+            }
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+        return userList;
+    }
+
+    @Override
+    public User readingResultSet(ResultSet resultSet) {
+        User user = new User();
+        try {
+            user.setId(resultSet.getInt("id_user"));
+            user.setEmail(resultSet.getString("email"));
+            user.setName(resultSet.getString("name"));
+            user.setSurname(resultSet.getString("surname"));
+            user.setLibrarian(resultSet.getBoolean("librarian"));
+            user.setAdmin(resultSet.getBoolean("admin"));
+            user.setBlocked(resultSet.getBoolean("blocked"));
+            user.setPassword(resultSet.getString("password"));
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        }
+        return user;
+    }
+
+    public static void main(String[] args) {
+        UserDAO userDAO = new UserDAO();
+        List<User> userList = userDAO.getUserList();
+        System.out.println(userList);
     }
 
     @Override

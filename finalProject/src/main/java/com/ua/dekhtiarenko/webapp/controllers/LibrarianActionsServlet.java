@@ -8,10 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-public class EditProfileServlet extends HttpServlet {
-
-    private final UserDAO userDAO = new UserDAO();
+public class LibrarianActionsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,16 +19,12 @@ public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("cp1251");
-        resp.setContentType("text/html");
+        UserDAO userDAO = new UserDAO();
 
-        User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
+        List<User> userList = userDAO.getUserList();
 
-        user.setName(req.getParameter("Name"));
-        user.setSurname(req.getParameter("Surname"));
-        user.setPassword(req.getParameter("Password"));
+        req.setAttribute("userList", userList);
 
-        userDAO.updateUser(user);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/librarianActions.jsp").forward(req,resp);
     }
 }

@@ -22,33 +22,32 @@
                 <a class = "link changeOnClick" href="index.jsp">Log out</a>
             </nav>
       </div>
-<div class="container">
-    <img class="avatar"  src="images/avatarR.png">
-      <form action ="RegisterServlet" method = "post">
+        <div class="container">
+            <img class="avatar"  src="images/avatarR.png">
+                <form action ="RegisterServlet" method = "post">
+                      <div class="dws-input">
+                          <img class="reg_images" src="images/email.png">
+                          <input type = "email" name = "Email" placeholder="Your Email">
+                      </div>
 
-            <div class="dws-input">
-                <img class="reg_images" src="images/email.png">
-                <input type = "email" name = "Email" placeholder="Your Email">
-            </div>
+                      <div class="dws-input">
+                          <img class="reg_images" src="images/name.png">
+                          <input type = "text" name = "Name" placeholder="Your Name">
+                      </div>
 
-            <div class="dws-input">
-                <img class="reg_images" src="images/name.png">
-                <input type = "text" name = "Name" placeholder="Your Name">
-            </div>
-
-            <div class="dws-input">
-                <img class="reg_images" src="images/surname.png">
-              <input type = "text" name = "Surname" placeholder="Your Surname">
-            </div>
-            <div class="dws-input">
-                 <img class="reg_images" src="images/password.png">
-                <input type="password" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$"
-               placeholder="Your Password(Min 6 Chars)"
-               name="Password">
-            </div>
-                <input class ="dws-submit" type="submit" value = "Confirm">
-        </form>
-    </div>
+                      <div class="dws-input">
+                          <img class="reg_images" src="images/surname.png">
+                        <input type = "text" name = "Surname" placeholder="Your Surname">
+                      </div>
+                      <div class="dws-input">
+                           <img class="reg_images" src="images/password.png">
+                          <input type="password" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$"
+                         placeholder="Your Password(Min 6 Chars)"
+                         name="Password">
+                      </div>
+                          <input class ="dws-submit" type="submit" value = "Confirm">
+                </form>
+        </div>
             <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>
     </body>
 </html>

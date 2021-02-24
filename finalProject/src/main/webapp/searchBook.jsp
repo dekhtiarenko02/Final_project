@@ -30,7 +30,6 @@
                 </nav>
             <div class="books_catalog_overlay"> </div>
      </div>
-
         <div class = "header">
         <form action ="SearchServlet" method = "post">
             <div>
@@ -52,42 +51,30 @@
             </nav>
     </div>
         <div class="catalogBook">
-             <c:forEach var="book" items="${bookList}">
              <div class="bookStyle">
                 <div class="titleBook">
-                    <p class="indent">Genre: ${book.getGenre()}</p>
-				    <p class="indent">${book.getAuthor()}.</p>
+                    <p class="indent">Genre: ${book.genre}</p>
+				    <p class="indent">${book.author}</p>
                 </div>
-                <img align="left" src=${book.getUrlImg()} class="bookIMG">
+                <img align="left" src=${book.urlImg} class="bookIMG">
                 <div class="infoBook">
-                        <span>Author: ${book.getAuthor()}.</span><br>
-                        <span>Name: <strong>${book.getNameOfBook()}.</strong></span><br>
-                        <span>Publisher: </span>${book.getPublisher()}.<br>
-                        <span>Year: </span>${book.getYear()}.<br>
-                        <span>Availability: </span>${book.getAvailability()}.<br>
-                        <span>Number of pages: </span>${book.getNumberOfPages()}.<br>
-					   <span>Language:</span> ${book.getLanguage()}.<br>
+                        <span>Author: ${book.author}</span><br>
+                        <span>Name: <strong>${book.nameOfBook}</strong></span><br>
+                        <span>Publisher: </span>${book.publisher}<br>
+                        <span>Year: </span>${book.year}<br>
+                        <span>Availability: </span>${book.availability}<br>
+                        <span>Number of pages: </span>${book.numberOfPages}<br>
+					   <span>Language:</span> ${book.language}<br>
             </div>
             <div class="plotBook">
-                <p>${book.getPlot()}</p>
+                <p>${book.plot}</p>
+            </div>
+            <form action="ArrangeServlet?id=${idVal}" method="post">
+                <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>
+                <button class="return-book" type="submit">Return book</button>
+            </form>
         </div>
-        <form action="ArrangeServlet?id=${idVal}" method="post">
-            <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>
-            <button class="return-book" type="submit">Return book</button>
-        </form>
-        </div>
-            </c:forEach>
-            <div class="center">
-                <div class="pagination">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                  </div>
-                </div>
-        </div>
+    </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

@@ -47,4 +47,36 @@
         <servlet-name>ArrangeServlet</servlet-name>
         <url-pattern>/ArrangeServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.EditProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditProfileServlet</servlet-name>
+        <url-pattern>/EditProfileServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminActionsServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.AdminActionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminActionsServlet</servlet-name>
+        <url-pattern>/AdminActionsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LibrarianActionsServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.LibrarianActionsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianActionsServlet</servlet-name>
+        <url-pattern>/LibrarianActionsServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

@@ -19,5 +19,9 @@ public interface BookDAOMethods {
 
     String getNameOfBookById(int bookId);
 
+    Book getBookByName(String name);
+
+    void reduceBookAvailabilityById(int id_book);
+
     void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs);
 }

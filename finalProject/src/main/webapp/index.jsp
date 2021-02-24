@@ -35,6 +35,12 @@
             <div class="books_catalog_overlay"> </div>
         </div>
         <div class = "header">
+            <form action ="SearchServlet" method = "post">
+                <div>
+                    <input type="text" class="search" name="Search" placeholder="Search">
+                    <input class ="search-submit" type="submit" value="Confirm">
+                </div>
+            </form>
             <nav id="notHiddenLinks">
                 <a class = "link" href="login.jsp">Log in</a>
                 <span class="stick">|</span>

@@ -2,10 +2,8 @@ package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
-import com.ua.dekhtiarenko.webapp.db.entity.Subscription;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;

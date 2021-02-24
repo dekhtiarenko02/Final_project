@@ -11,7 +11,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-
     <%
     if(request.getParameter("id") != null){
         String idParam = request.getParameter("id");
@@ -34,7 +33,6 @@
             </nav>
             <div class="books_catalog_overlay"> </div>
         </div>
-
         <div class = "header">
                 <a href="index.jsp?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                    height="64">
@@ -51,41 +49,17 @@
             </nav>
         </div>
 
-        <div class="profile">
-            <img class="profileImg" src="images/profileU.png">
-            <div class="personalData">
-            <form action ="editProfile.jsp?id=${idVal}" method = "post">
-                <button class="editProfileButton" type="submit">Edit profile</button>
-            </form>
-                <p>Name: ${user.name} <p>
-                <p>Surname: ${user.surname}</p>
-                <p>Email: ${user.email}</p>
-                <c:if test="${user.getAdmin() == true}">
-                    <p class="admin">Admin: true</p>
-                    <form action ="AdminActionsServlet?id=${idVal}" method = "post">
-                        <button class="adminActionsButton" type="submit">Admin actions</button>
-                    </form>
-                </c:if>
-                <c:if test="${user.getLibrarian() == true}">
-                    <p class="librarian">Librarian: true</p>
-                    <form action ="LibrarianActionsServlet?id=${idVal}" method = "post">
-                        <button class="librarianActionsButton" type="submit">Librarian actions</button>
-                    </form>
-                </c:if>
-                <c:if test="${date != null}">
-                    <p>Returning date: ${date}</p>
-                    <p>Penalty: ${penalty} $</p>
-                    <p>Books:
-                    <c:forEach var="book" items="${bookList}">
-                    <c:if test="${book != bookList.get(bookList.size() - 1)}">
-                        "${book}",
-                    </c:if>
-                    </c:forEach>
-                    "${bookList.get(bookList.size()- 1)}"
-                </c:if>
-                </p>
-            </div>
+        <div class="adminActions">
+
+
+        <form action="" method="post">
+
+        </form>
+
+
+
         </div>
+
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

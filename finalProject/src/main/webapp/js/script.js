@@ -17,3 +17,7 @@ window.addEventListener("load",function(){
         localStorage.setItem("notHiddenLinksStyle", document.getElementById("notHiddenLinks").style.display);
     }); // перезаписываем страницу при каждом клике
 });
+
+        document.getElementById('userListButton').onclick = function() {
+          document.getElementById('table').hidden = true;
+        }

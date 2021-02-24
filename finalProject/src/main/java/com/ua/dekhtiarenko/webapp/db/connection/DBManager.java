@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class DBManager {
     private static Connection conn = null;
-    private static Properties properties;
+    private static final Properties properties = new Properties();
     private static final String URL = "jdbc:mysql://localhost:3306/web_library?user=root&password=64ohelos&" +
             "serverTimezone=Europe/Kiev&useSSL=false";
 
@@ -17,7 +17,6 @@ public class DBManager {
     }
 
     public static Connection getConnection() {
-        properties = new Properties();
         properties.setProperty("useUnicode", "true");
         properties.setProperty("characterEncoding", "UTF-8");
         try {
