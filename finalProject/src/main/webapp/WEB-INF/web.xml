@@ -7,6 +7,11 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          version="3.0">
     <display-name>Archetype Created Web Application</display-name>
+
+    <listener>
+        <listener-class>com.ua.dekhtiarenko.webapp.listener.ContextListener</listener-class>
+    </listener>
+
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>com.ua.dekhtiarenko.webapp.controllers.RegisterServlet</servlet-class>
@@ -78,5 +83,53 @@
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReturnServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.ReturnServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReturnServlet</servlet-name>
+        <url-pattern>/ReturnServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderServlet</servlet-name>
+        <url-pattern>/OrderServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeUserServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.ChangeUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeUserServlet</servlet-name>
+        <url-pattern>/ChangeUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ChangeBookServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.ChangeBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeBookServlet</servlet-name>
+        <url-pattern>/ChangeBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>InsertBookServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.InsertBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>InsertBookServlet</servlet-name>
+        <url-pattern>/InsertBookServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.DeleteBookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteBookServlet</servlet-name>
+        <url-pattern>/DeleteBookServlet</url-pattern>
     </servlet-mapping>
 </web-app>

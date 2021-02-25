@@ -8,20 +8,17 @@ import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
+
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
 
 public class SubscriptionBookDAO implements SubscriptionBookDAOMethods {
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
-
-    public static void main(String[] args) {
-        Date date = new Date(System.currentTimeMillis());
-        date.setTime(date.getTime() + TimeUnit.DAYS.toMillis(7));
-        System.out.println(date);
-    }
 
     @Override
     public void insertSubscriptionBook(int bookId, int subscriptionId) {
@@ -41,6 +38,39 @@ public class SubscriptionBookDAO implements SubscriptionBookDAOMethods {
     }
 
     @Override
+    public void deleteSubscriptionBook(int bookId, int subscriptionId) {
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.DELETE_FROM_SUBSCRIPTION_BOOK);
+            preparedStatement.setInt(1, subscriptionId);
+            preparedStatement.setInt(2, bookId);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+    }
+
+    @Override
+    public List<SubscriptionBook> getListSubscriptionBook() {
+        List<SubscriptionBook> list = new ArrayList<>();
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.SELECT_FROM_SUBSCRIPTION_BOOK);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                list.add(readingResultSet(rs));
+            }
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+        return list;
+    }
+
+    @Override
     public List<SubscriptionBook> getListSubscriptionBook(int userId) {
         List<SubscriptionBook> list = new ArrayList<>();
         try {
@@ -56,9 +86,9 @@ public class SubscriptionBookDAO implements SubscriptionBookDAOMethods {
         } finally {
             closing(connection, preparedStatement, rs);
         }
-
         return list;
     }
+
 
     @Override
     public SubscriptionBook readingResultSet(ResultSet resultSet) {

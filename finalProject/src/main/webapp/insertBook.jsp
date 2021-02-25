@@ -12,15 +12,16 @@
      </head>
      <body>
 
-     <%
-     if(request.getParameter("id") != null){
-         String idParam = request.getParameter("id");
-         request.setAttribute("idVal", idParam);
-     }
-     else{
-         request.setAttribute("idVal", request.getAttribute("id"));
-     }
-     %>
+<%
+
+    if(request.getParameter("id") != null){
+        String idParam = request.getParameter("id");
+        request.setAttribute("idVal", idParam);
+    }
+    else{
+        request.setAttribute("idVal", request.getAttribute("id"));
+    }
+%>
          <div class="books_catalog">
              <a href = "#" class="books_catalog_button">
                  <span class="books_catalog_lines"> </span>
@@ -51,12 +52,16 @@
              </nav>
          </div>
 
-            <div class="insertContainer">
+        <form action="InsertBookServlet?id=${idVal}" method="post">
+            <div id="insertContainer">
                  <div class="dws-input">
                      <input type = "text" name="Genre" placeholder="Genre">
                  </div>
                  <div class="dws-input">
                      <input type = "text" name="UrlImg" placeholder="Url Img">
+                 </div>
+                 <div class="dws-input">
+                     <input type = "text" name="Author" placeholder="Author">
                  </div>
                  <div class="dws-input">
                    <input type = "text" name="NameOfBook" placeholder="Name Of Book">
@@ -65,13 +70,13 @@
                    <input type = "text" name="Publisher" placeholder="Publisher">
                  </div>
                  <div class="dws-input">
-                   <input type = "text" name="Year" placeholder="Year">
+                   <input type = "text" name="year" placeholder="Year">
                  </div>
                  <div class="dws-input">
-                    <input type = "text" name="Availability" placeholder="Availability">
+                    <input type = "text" name="availability" placeholder="Availability">
                  </div>
                  <div class="dws-input">
-                    <input type = "text" name="NumberOfPages" placeholder="Number Of Pages">
+                    <input type = "text" name="numberOfPages" placeholder="Number Of Pages">
                  </div>
                  <div class="dws-input">
                     <input type = "text" name="Language" placeholder="Language">
@@ -81,7 +86,7 @@
                  </div>
                      <input class ="dws-submit" type="submit" value = "Confirm">
             </div>
-
+            </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

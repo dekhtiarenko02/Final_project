@@ -1,16 +1,21 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
+import com.ua.dekhtiarenko.webapp.services.LoginService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public class LogInServlet extends HttpServlet {
 
-    private final UserDAO userDAO = new UserDAO();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,16 +24,12 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("cp1251");
-        resp.setContentType("text/html");
+        req.setCharacterEncoding(Request.CP_1251);
+        resp.setContentType(Request.TEXT_HTML);
 
-        String email = req.getParameter("Email");
-        String password = req.getParameter("Password");
+        ServletContext servletContext = req.getServletContext();
 
-
-        if (userDAO.validate(email, password)) {
-            req.setAttribute("id", userDAO.getUserIdByEmail(email));
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
-        }
+        LoginService loginService = (LoginService) servletContext.getAttribute("loginService");
+        loginService.login(req, resp);
     }
 }

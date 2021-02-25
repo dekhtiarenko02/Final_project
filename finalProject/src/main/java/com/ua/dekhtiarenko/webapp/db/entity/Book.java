@@ -1,5 +1,9 @@
 package com.ua.dekhtiarenko.webapp.db.entity;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public class Book {
 
     private int id;
@@ -13,8 +17,9 @@ public class Book {
     private int numberOfPages;
     private String language;
     private String plot;
+    private boolean isOrder;
 
-    public Book(){
+    public Book() {
 
     }
 
@@ -104,6 +109,14 @@ public class Book {
 
     public void setPlot(String plot) {
         this.plot = plot;
+    }
+
+    public boolean getIsOrder() {
+        return isOrder;
+    }
+
+    public void setOrder(boolean order) {
+        isOrder = order;
     }
 
     @Override

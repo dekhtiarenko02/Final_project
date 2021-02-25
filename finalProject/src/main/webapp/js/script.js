@@ -18,6 +18,18 @@ window.addEventListener("load",function(){
     }); // перезаписываем страницу при каждом клике
 });
 
-        document.getElementById('userListButton').onclick = function() {
-          document.getElementById('table').hidden = true;
-        }
+
+var input = document.querySelectorAll('input')
+  ,value = input.value;
+
+input.addEventListener('input', onInput);
+
+function onInput(e){
+  var newValue = e.target.value;
+  if( newValue.match(/[^a-zA-Zа-яА-Я0-9]/g)) {
+     input.value = value;
+     return;
+  }
+  value = newValue;
+}
+//<input type="text" id="in-txt">

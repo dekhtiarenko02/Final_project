@@ -1,5 +1,9 @@
 package com.ua.dekhtiarenko.webapp.db.entity;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public class Subscription {
 
     private int id;

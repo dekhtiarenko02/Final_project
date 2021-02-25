@@ -48,15 +48,13 @@ else{
             <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
         </nav>
     </div>
-
-
-
         <div class="librarianActions">
-        <button value="userList" id="userListButton" class="listOfUsersButton" type="submit">User list</button>
-        <button value="userList" id="userListButton" class="listOfUsersButton" type="submit">User list</button>
-        <button value="userList" id="userListButton" class="listOfUsersButton" type="submit">User list</button>
-        <div class="updatePanel">
-            <table id="table">
+        <button id="userListButton" class="listOfUsersButton" type="submit">User list</button>
+        <button id="subscriptionButton" class="subscriptionOfUserButton" type="submit">Subscription</button>
+        <button id="subscriptionBookButton" class="subscriptionBookOfUserButton" type="submit">Subscription book</button>
+        <button id="bookListButton" class="bookListButton" type="submit">Book list</button>
+        <div id="tables">
+            <table id="tableOfUsers">
                 <tr>
                     <th>Id</th>
                     <th>Email</th>
@@ -80,9 +78,92 @@ else{
                 </tr>
                 </c:forEach>
             </table>
+        <table id="subscriptionTable">
+            <tr>
+                <th>Id</th>
+                <th>Penalty</th>
+                <th>User Id</th>
+            </tr>
+            <c:forEach var="subscription" items="${subscriptionList}">
+            <tr>
+                <td>${subscription.getId()}</td>
+                <td>${subscription.getPenalty()}</td>
+                <td>${subscription.getUser_id()}</td>
+            </tr>
+            </c:forEach>
+            </table>
+            <table id="subscriptionBookTable">
+            <tr>
+                <th>Id</th>
+                <th>Date Of Purchase</th>
+                <th>Subscription Id</th>
+                <th>Book Id</th>
+            </tr>
+            <c:forEach var="subscriptionBook" items="${subscriptionBookList}">
+            <tr>
+                <td>${subscriptionBook.getId()}</td>
+                <td>${subscriptionBook.getDateOfPurchase()}</td>
+                <td>${subscriptionBook.getSubscription_id()}</td>
+                <td>${subscriptionBook.getBook_id()}</td>
+            </tr>
+            </c:forEach>
+            </table>
+            <table id="bookListTable">
+                <tr>
+                    <th>Id</th>
+                    <th>Genre</th>
+                    <th>Author</th>
+                    <th>Name Of Book</th>
+                    <th>Publisher</th>
+                    <th>Year</th>
+                    <th>Availability</th>
+                    <th>Number Of Pages</th>
+                    <th>Language</th>
+                    <th>Is Order</th>
+                </tr>
+                <c:forEach var="book" items="${bookList}">
+                <tr>
+                    <td>${book.getId()}</td>
+                    <td>${book.getGenre()}</td>
+                    <td>${book.getAuthor()}</td>
+                    <td>${book.getNameOfBook()}</td>
+                    <td>${book.getPublisher()}</td>
+                    <td>${book.getYear()}</td>
+                    <td>${book.getAvailability()}</td>
+                    <td>${book.getNumberOfPages()}</td>
+                    <td>${book.getLanguage()}</td>
+                    <td>${book.getIsOrder()}</td>
+                </tr>
+                </c:forEach>
+                </table>
         </div>
         </div>
         <script>
+        document.getElementById('userListButton').onclick = function() {
+          document.getElementById('tableOfUsers').style.display = "block";
+          document.getElementById('subscriptionTable').style.display = "none";
+          document.getElementById('subscriptionBookTable').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+        }
+        document.getElementById('subscriptionButton').onclick = function() {
+          document.getElementById('tableOfUsers').style.display = "none";
+          document.getElementById('subscriptionTable').style.display = "block";
+          document.getElementById('subscriptionBookTable').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+        }
+        document.getElementById('bookListButton').onclick = function() {
+          document.getElementById('tableOfUsers').style.display = "none";
+          document.getElementById('subscriptionTable').style.display = "none";
+          document.getElementById('subscriptionBookTable').style.display = "none";
+          document.getElementById('bookListTable').style.display = "block";
+        }
+        document.getElementById('subscriptionBookButton').onclick = function() {
+          document.getElementById('tableOfUsers').style.display = "none";
+          document.getElementById('subscriptionTable').style.display = "none";
+          document.getElementById('subscriptionBookTable').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('subscriptionBookTable').style.display = "block";
+        }
         </script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>

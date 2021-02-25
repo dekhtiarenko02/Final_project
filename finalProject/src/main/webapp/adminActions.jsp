@@ -49,17 +49,143 @@
             </nav>
         </div>
 
-        <div class="adminActions">
-
-
-        <form action="" method="post">
-
-        </form>
-
-
-
+        <div id="hiddenBlock">
         </div>
-
+        <div class="adminActions">
+        <button id="userListButton" class="listOfUsersButton" type="submit">User list</button>
+        <button id="changeUserButton" class="changingUserButton" type="submit">Change User</button>
+        <button id="deleteBookButton" class="deletingBookButton" type="submit">Delete book</button>
+        <button id="bookListButton" class="listOfBookButton" type="submit">Book list</button>
+        <button id="changeBookButton" class="changingBookButton" type="submit">Change book</button>
+        <form action="insertBook.jsp?id=${idVal}" method="post">
+            <button id="insertBookButton" class="insertingBookButton" type="submit">Insert book</button>
+        </form>
+              <table id="tableOfUsers_Admin">
+                     <tr>
+                         <th>Id</th>
+                         <th>Email</th>
+                         <th>Name</th>
+                         <th>Surname</th>
+                         <th>Librarian</th>
+                         <th>Admin</th>
+                         <th>Blocked</th>
+                         <th>Password</th>
+                     </tr>
+                     <c:forEach var="user" items="${userList}">
+                     <tr>
+                         <td>${user.getId()}</td>
+                         <td>${user.email}</td>
+                         <td>${user.name}</td>
+                         <td>${user.surname}</td>
+                         <td>${user.librarian}</td>
+                         <td>${user.admin}</td>
+                         <td>${user.blocked}</td>
+                         <td>${user.password}</td>
+                     </tr>
+                     </c:forEach>
+              </table>
+            <table id="bookListTable">
+                <tr>
+                    <th>Id</th>
+                    <th>Genre</th>
+                    <th>Author</th>
+                    <th>Name Of Book</th>
+                    <th>Publisher</th>
+                    <th>Year</th>
+                    <th>Availability</th>
+                    <th>Number Of Pages</th>
+                    <th>Language</th>
+                    <th>Is Order</th>
+                </tr>
+                <c:forEach var="book" items="${bookList}">
+                <tr>
+                    <td>${book.getId()}</td>
+                    <td>${book.getGenre()}</td>
+                    <td>${book.getAuthor()}</td>
+                    <td>${book.getNameOfBook()}</td>
+                    <td>${book.getPublisher()}</td>
+                    <td>${book.getYear()}</td>
+                    <td>${book.getAvailability()}</td>
+                    <td>${book.getNumberOfPages()}</td>
+                    <td>${book.getLanguage()}</td>
+                    <td>${book.getIsOrder()}</td>
+                </tr>
+                </c:forEach>
+                </table>
+        </div>
+        <div id="changeUserContainer">
+        <form action="changeUser.jsp?id=${idVal}" method="post">
+            <img class="avatar"  src="images/avatarR.png">
+                   <div class="dws-input">
+                       <input type = "text" name="user_id" placeholder="Enter User Id">
+                   </div>
+            <input class ="dws-submit" type="submit" value="Confirm">
+            </form>
+        </div>
+        <div id="changeBookContainer">
+        <form action="changeBook.jsp?id=${idVal}" method="post">
+            <img class="avatar"  src="images/avatarR.png">
+                   <div class="dws-input">
+                       <input type = "text" name="book_id" placeholder="Enter Book Id">
+                   </div>
+            <input class ="dws-submit" type="submit" value="Confirm">
+            </form>
+        </div>
+        <div id="deleteBookContainer">
+        <form action="deleteBook.jsp?id=${idVal}" method="post">
+              <div class="dws-input">
+                  <input type = "text" name="book_id" placeholder="Enter Book Id">
+              </div>
+            <input class ="dws-submit" type="submit" value="Confirm">
+            </form>
+        </div>
+        <script>
+        document.getElementById('changeUserButton').onclick = function() {
+          document.getElementById('changeUserContainer').style.display = "block";
+          document.getElementById('hiddenBlock').style.display = "block";
+          document.getElementById('tableOfUsers_Admin').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('changeBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
+          document.getElementById('deleteBookContainer').style.display = "none";
+        }
+        document.getElementById('userListButton').onclick = function() {
+          document.getElementById('changeUserContainer').style.display = "none";
+          document.getElementById('hiddenBlock').style.display = "none";
+          document.getElementById('tableOfUsers_Admin').style.display = "block";
+          document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('changeBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
+          document.getElementById('deleteBookContainer').style.display = "none";
+        }
+        document.getElementById('bookListButton').onclick = function() {
+          document.getElementById('changeUserContainer').style.display = "none";
+          document.getElementById('hiddenBlock').style.display = "none";
+          document.getElementById('tableOfUsers_Admin').style.display = "none";
+          document.getElementById('bookListTable').style.display = "block";
+          document.getElementById('changeBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
+          document.getElementById('deleteBookContainer').style.display = "none";
+        }
+        document.getElementById('changeBookButton').onclick = function() {
+          document.getElementById('changeUserContainer').style.display = "none";
+          document.getElementById('hiddenBlock').style.display = "block";
+          document.getElementById('tableOfUsers_Admin').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('changeBookContainer').style.display = "block";
+          document.getElementById('insertBookContainer').style.display = "none";
+          document.getElementById('deleteBookContainer').style.display = "none";
+        }
+        document.getElementById('deleteBookButton').onclick = function() {
+          document.getElementById('changeUserContainer').style.display = "none";
+          document.getElementById('hiddenBlock').style.display = "block";
+          document.getElementById('deleteBookContainer').style.display = "block";
+          document.getElementById('tableOfUsers_Admin').style.display = "none";
+          document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('changeBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
+        }
+        </script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

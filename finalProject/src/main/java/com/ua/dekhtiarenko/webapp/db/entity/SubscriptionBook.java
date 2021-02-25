@@ -2,6 +2,10 @@ package com.ua.dekhtiarenko.webapp.db.entity;
 
 import java.util.Date;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public class SubscriptionBook {
 
     private int id;

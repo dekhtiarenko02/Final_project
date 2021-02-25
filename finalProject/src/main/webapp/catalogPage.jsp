@@ -64,16 +64,32 @@
                         <span>Name: <strong>${book.getNameOfBook()}.</strong></span><br>
                         <span>Publisher: </span>${book.getPublisher()}.<br>
                         <span>Year: </span>${book.getYear()}.<br>
-                        <span>Availability: </span>${book.getAvailability()}.<br>
+                        <span>Availability: </span>
+                        <c:if test="${book.getAvailability() >= 1}">
+                            ${book.getAvailability()}.<br>
+                        </c:if>
+                        <c:if test="${book.getAvailability() <= 0}">
+                            Out of stock.<br>
+                        </c:if>
                         <span>Number of pages: </span>${book.getNumberOfPages()}.<br>
-					   <span>Language:</span> ${book.getLanguage()}.<br>
+					    <span>Language:</span> ${book.getLanguage()}.<br>
             </div>
             <div class="plotBook">
                 <p>${book.getPlot()}</p>
         </div>
+        <form action="OrderServlet?id=${idVal}" method="post">
+            <c:if test="${book.getAvailability() <= 0}">
+                <button class="order-book" type="submit" name="orderButton" value="${book.getNameOfBook()}">Order book</button>
+            </c:if>
+        </form>
+
         <form action="ArrangeServlet?id=${idVal}" method="post">
-            <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>
-            <button class="return-book" type="submit">Return book</button>
+            <c:if test="${book.getAvailability() >= 1}">
+                <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>
+            </c:if>
+        </form>
+        <form action="ReturnServlet?id=${idVal}" method="post">
+                <button class="return-book" type="submit" name="returnButton" value="${book.getNameOfBook()}">Return book</button>
         </form>
         </div>
             </c:forEach>
@@ -82,9 +98,6 @@
                     <a href="#" class="active">1</a>
                     <a href="#">2</a>
                     <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
                   </div>
                 </div>
         </div>

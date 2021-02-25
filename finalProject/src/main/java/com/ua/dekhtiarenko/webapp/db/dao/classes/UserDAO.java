@@ -3,13 +3,19 @@ package com.ua.dekhtiarenko.webapp.db.dao.classes;
 import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAOMethods;
-import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
 
 public class UserDAO implements UserDAOMethods {
 
@@ -82,6 +88,26 @@ public class UserDAO implements UserDAOMethods {
     }
 
     @Override
+    public void updateUser(User user, int user_id) {
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.UPDATE_USER);
+            preparedStatement.setString(1, user.getName());
+            preparedStatement.setString(2, user.getSurname());
+            preparedStatement.setBoolean(3, user.getLibrarian());
+            preparedStatement.setBoolean(4, user.getAdmin());
+            preparedStatement.setBoolean(5, user.getBlocked());
+            preparedStatement.setInt(6, user_id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+    }
+
+
+    @Override
     public List<User> getUserList() {
         List<User> userList = new ArrayList<>();
         try {
@@ -117,12 +143,6 @@ public class UserDAO implements UserDAOMethods {
         return user;
     }
 
-    public static void main(String[] args) {
-        UserDAO userDAO = new UserDAO();
-        List<User> userList = userDAO.getUserList();
-        System.out.println(userList);
-    }
-
     @Override
     public int getUserIdByEmail(String email) {
         int id = 0;
@@ -143,7 +163,7 @@ public class UserDAO implements UserDAOMethods {
     }
 
     @Override
-    public boolean validate(String name, String pass) {
+    public boolean exists(String name, String pass) {
         boolean status = false;
         try {
             connection = DBManager.getConnection();

@@ -6,6 +6,10 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public class DBManager {
     private static Connection conn = null;
     private static final Properties properties = new Properties();

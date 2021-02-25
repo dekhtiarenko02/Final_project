@@ -1,20 +1,20 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
+import com.ua.dekhtiarenko.webapp.services.ArrangeService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class ArrangeServlet extends HttpServlet {
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
 
-    private final BookDAO bookDAO = new BookDAO();
-    private final SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
-    private final SubscriptionBookDAO subscriptionBookDAO = new SubscriptionBookDAO();
+public class ArrangeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,14 +23,12 @@ public class ArrangeServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding(Request.CP_1251);
+        resp.setContentType(Request.TEXT_HTML);
 
-        int bookId = bookDAO.getBookIdByName(req.getParameter("arrangeButton"));
-        int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
+        ServletContext servletContext = req.getServletContext();
 
-        subscriptionBookDAO.insertSubscriptionBook(bookId, subscriptionId);
-        bookDAO.reduceBookAvailabilityById(bookId);
-
-        req.setAttribute("id",req.getParameter("id"));
-        req.getRequestDispatcher("ProfileServlet").forward(req, resp);
+        ArrangeService arrangeService = (ArrangeService) servletContext.getAttribute("arrangeService");
+        arrangeService.arrange(req, resp);
     }
 }

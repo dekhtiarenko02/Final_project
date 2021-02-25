@@ -7,6 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.List;
 
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
+
 public interface UserDAOMethods {
 
     void insertUser(User user);
@@ -21,7 +25,9 @@ public interface UserDAOMethods {
 
     void updateUser(User user);
 
-    boolean validate(String name, String pass);
+    void updateUser(User user, int user_id);
+
+    boolean exists(String name, String pass);
 
     void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs);
 }

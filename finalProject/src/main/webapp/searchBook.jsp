@@ -51,6 +51,7 @@
             </nav>
     </div>
         <div class="catalogBook">
+        <c:forEach var="book" items="${bookList}">
              <div class="bookStyle">
                 <div class="titleBook">
                     <p class="indent">Genre: ${book.genre}</p>
@@ -68,6 +69,7 @@
             </div>
             <div class="plotBook">
                 <p>${book.plot}</p>
+                </c:forEach>
             </div>
             <form action="ArrangeServlet?id=${idVal}" method="post">
                 <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>

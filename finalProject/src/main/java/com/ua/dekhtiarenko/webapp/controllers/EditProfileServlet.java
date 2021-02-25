@@ -1,17 +1,20 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
-import com.ua.dekhtiarenko.webapp.db.entity.User;
+import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
+import com.ua.dekhtiarenko.webapp.services.EditProfileService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class EditProfileServlet extends HttpServlet {
+/**
+ * Created by Dekhtiarenko-Daniil on 25.02.2021.
+ */
 
-    private final UserDAO userDAO = new UserDAO();
+public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,16 +23,12 @@ public class EditProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("cp1251");
-        resp.setContentType("text/html");
+        req.setCharacterEncoding(Request.CP_1251);
+        resp.setContentType(Request.TEXT_HTML);
 
-        User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
+        ServletContext servletContext = req.getServletContext();
 
-        user.setName(req.getParameter("Name"));
-        user.setSurname(req.getParameter("Surname"));
-        user.setPassword(req.getParameter("Password"));
-
-        userDAO.updateUser(user);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        EditProfileService editProfileService = (EditProfileService) servletContext.getAttribute("editProfileService");
+        editProfileService.editProfile(req, resp);
     }
 }
