@@ -17,12 +17,10 @@ public class CatalogService {
     public void catalog(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
 
         String genre = req.getParameter("genre");
         req.setAttribute("bookList", bookDAO.getListBook(genre));
-
         req.getRequestDispatcher("/catalogPage.jsp").forward(req, resp);
     }
 }

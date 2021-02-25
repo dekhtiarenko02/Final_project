@@ -18,16 +18,14 @@ public class EditProfileService {
     public void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
 
         user.setName(req.getParameter("Name"));
         user.setSurname(req.getParameter("Surname"));
         user.setPassword(req.getParameter("Password"));
-
         userDAO.updateUser(user);
+
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
-
 }

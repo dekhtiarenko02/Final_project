@@ -11,8 +11,6 @@
     </head>
     <body>
     <%
-        String genreParam = request.getParameter("genre");
-        request.setAttribute("genreVar",genreParam);
         if(request.getParameter("id") != null){
             String idParam = request.getParameter("id");
             request.setAttribute("idVal", idParam);
@@ -49,9 +47,19 @@
             <nav id="hiddenLinks">
                 <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
                 <span class="stick">|</span>
-                <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
             </nav>
       </div>
+      <form action="MainPageServlet?id=${idVal}" method="post">
+      <div class="mainPage">
+           <c:forEach var="book" items="${bookList}" end="4">
+           <div class="mainBook">
+           <img class="mainBooksImg" src="${book.getUrlImg()}">
+           	    <p class="mainInfoBook">${book.nameOfBook}.</p>
+           </div>
+           </c:forEach>
+      </div>
+      </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

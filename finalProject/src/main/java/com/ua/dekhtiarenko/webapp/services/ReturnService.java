@@ -29,15 +29,11 @@ public class ReturnService {
         SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
         SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
 
-
         User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
-
         int bookIdReturn = bookDAO.getBookIdByName(req.getParameter("returnButton"));
         int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
         int bookAvailability = bookDAO.getAvailabilityByBookId(bookIdReturn);
-
         List<SubscriptionBook> subscriptionBook = subscriptionBookDAO.getListSubscriptionBook(user.getId());
-
         boolean userHaveBook = false;
 
         if (bookAvailability >= 0) {

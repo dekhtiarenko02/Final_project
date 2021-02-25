@@ -19,12 +19,10 @@ public class RegisterService {
     public void registration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
 
         User user = new User();
-
         String email = req.getParameter("Email");
         String name = req.getParameter("Name");
         String surname = req.getParameter("Surname");
@@ -41,8 +39,6 @@ public class RegisterService {
         user.setId(userDAO.getUserIdByEmail(user.getEmail()));
 
         subscriptionDAO.insertSubscription(user);
-
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
-
     }
 }

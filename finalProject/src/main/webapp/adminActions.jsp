@@ -34,7 +34,7 @@
             <div class="books_catalog_overlay"> </div>
         </div>
         <div class = "header">
-                <a href="index.jsp?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
+                <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                    height="64">
                 </a>
             <nav id="notHiddenLinks">
@@ -45,7 +45,7 @@
             <nav id="hiddenLinks">
                 <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
                 <span class="stick">|</span>
-                <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
             </nav>
         </div>
 
@@ -133,6 +133,7 @@
         </div>
         <div id="deleteBookContainer">
         <form action="deleteBook.jsp?id=${idVal}" method="post">
+            <img class="avatar"  src="images/avatarR.png">
               <div class="dws-input">
                   <input type = "text" name="book_id" placeholder="Enter Book Id">
               </div>
@@ -154,9 +155,9 @@
           document.getElementById('hiddenBlock').style.display = "none";
           document.getElementById('tableOfUsers_Admin').style.display = "block";
           document.getElementById('bookListTable').style.display = "none";
+          document.getElementById('deleteBookContainer').style.display = "none";
           document.getElementById('changeBookContainer').style.display = "none";
           document.getElementById('insertBookContainer').style.display = "none";
-          document.getElementById('deleteBookContainer').style.display = "none";
         }
         document.getElementById('bookListButton').onclick = function() {
           document.getElementById('changeUserContainer').style.display = "none";
@@ -164,8 +165,8 @@
           document.getElementById('tableOfUsers_Admin').style.display = "none";
           document.getElementById('bookListTable').style.display = "block";
           document.getElementById('changeBookContainer').style.display = "none";
-          document.getElementById('insertBookContainer').style.display = "none";
           document.getElementById('deleteBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
         }
         document.getElementById('changeBookButton').onclick = function() {
           document.getElementById('changeUserContainer').style.display = "none";
@@ -173,8 +174,8 @@
           document.getElementById('tableOfUsers_Admin').style.display = "none";
           document.getElementById('bookListTable').style.display = "none";
           document.getElementById('changeBookContainer').style.display = "block";
-          document.getElementById('insertBookContainer').style.display = "none";
           document.getElementById('deleteBookContainer').style.display = "none";
+          document.getElementById('insertBookContainer').style.display = "none";
         }
         document.getElementById('deleteBookButton').onclick = function() {
           document.getElementById('changeUserContainer').style.display = "none";

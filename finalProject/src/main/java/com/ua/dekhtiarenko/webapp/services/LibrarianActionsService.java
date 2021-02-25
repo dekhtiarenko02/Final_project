@@ -23,8 +23,8 @@ import java.util.List;
 public class LibrarianActionsService {
 
     public void librarianActions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext servletContext = req.getServletContext();
 
+        ServletContext servletContext = req.getServletContext();
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
         SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
@@ -39,7 +39,6 @@ public class LibrarianActionsService {
         req.setAttribute("userList", userList);
         req.setAttribute("subscriptionList", subscriptionList);
         req.setAttribute("subscriptionBookList", subscriptionBookList);
-
         req.getRequestDispatcher("/librarianActions.jsp").forward(req,resp);
     }
 }

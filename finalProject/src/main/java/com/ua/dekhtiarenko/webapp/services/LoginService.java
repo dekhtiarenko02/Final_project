@@ -15,17 +15,16 @@ import java.io.IOException;
 public class LoginService {
 
     public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+
         ServletContext servletContext = req.getServletContext();
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
 
         String email = req.getParameter("Email");
         String password = req.getParameter("Password");
 
-
-
         if (userDAO.exists(email, password) && !userDAO.getUserById(userDAO.getUserIdByEmail(email)).getBlocked()) {
             req.setAttribute("id", userDAO.getUserIdByEmail(email));
-            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            req.getRequestDispatcher("MainPageServlet").forward(req, resp);
         }
     }
 }

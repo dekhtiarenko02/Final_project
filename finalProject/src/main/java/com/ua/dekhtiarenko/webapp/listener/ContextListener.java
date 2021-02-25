@@ -39,6 +39,7 @@ public class ContextListener implements ServletContextListener {
         InsertBookService insertBookService = new InsertBookService();
         DeleteBookService deleteBookService = new DeleteBookService();
         ChangeUserService changeUserService = new ChangeUserService();
+        MainPageService mainPageService = new MainPageService();
 
 
 
@@ -56,6 +57,7 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("returnService", returnService);
         servletContext.setAttribute("searchService", searchService);
         servletContext.setAttribute("insertBookService", insertBookService);
+        servletContext.setAttribute("mainPageService", mainPageService);
 
 
 

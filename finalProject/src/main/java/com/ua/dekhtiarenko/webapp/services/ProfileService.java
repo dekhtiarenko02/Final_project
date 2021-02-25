@@ -26,7 +26,6 @@ public class ProfileService {
     public void profile(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         ServletContext servletContext = req.getServletContext();
-
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
         SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");

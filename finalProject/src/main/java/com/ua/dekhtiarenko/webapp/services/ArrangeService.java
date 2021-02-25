@@ -23,21 +23,16 @@ public class ArrangeService {
     public void arrange(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
         SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
         SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
-
-
         User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
 
         int bookId = bookDAO.getBookIdByName(req.getParameter("arrangeButton"));
         int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
         int bookAvailability = bookDAO.getAvailabilityByBookId(bookId);
-
         List<SubscriptionBook> subscriptionBook = subscriptionBookDAO.getListSubscriptionBook(user.getId());
-
         boolean userHaveBook = false;
 
         if (bookAvailability > 0) {

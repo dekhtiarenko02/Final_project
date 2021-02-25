@@ -37,7 +37,7 @@
                 <input class ="search-submit" type="submit" value="Confirm">
             </div>
         </form>
-                <a href="index.jsp?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
+                <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                     height="64"></a>
             <nav id="notHiddenLinks">
                 <a class = "link" href="login.jsp">Log in</a>
@@ -47,11 +47,12 @@
             <nav id="hiddenLinks">
                 <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
                 <span class="stick">|</span>
-                <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
             </nav>
     </div>
         <div class="catalogBook">
         <c:forEach var="book" items="${bookList}">
+        <c:if test="${book != null}">
              <div class="bookStyle">
                 <div class="titleBook">
                     <p class="indent">Genre: ${book.genre}</p>
@@ -69,6 +70,7 @@
             </div>
             <div class="plotBook">
                 <p>${book.plot}</p>
+                </c:if>
                 </c:forEach>
             </div>
             <form action="ArrangeServlet?id=${idVal}" method="post">

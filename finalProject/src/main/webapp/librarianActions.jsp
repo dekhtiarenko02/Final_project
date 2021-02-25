@@ -34,7 +34,7 @@ else{
         <div class="books_catalog_overlay"> </div>
     </div>
     <div class = "header">
-            <a href="index.jsp?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
+            <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                height="64">
             </a>
         <nav id="notHiddenLinks">
@@ -45,7 +45,7 @@ else{
         <nav id="hiddenLinks">
             <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
             <span class="stick">|</span>
-            <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
+            <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
         </nav>
     </div>
         <div class="librarianActions">

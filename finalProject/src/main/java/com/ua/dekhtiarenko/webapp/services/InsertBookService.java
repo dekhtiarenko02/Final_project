@@ -18,11 +18,9 @@ public class InsertBookService {
     public void insertBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
 
         Book book = new Book();
-
         book.setGenre(req.getParameter("Genre"));
         book.setUrlImg(req.getParameter("UrlImg"));
         book.setAuthor(req.getParameter("Author"));

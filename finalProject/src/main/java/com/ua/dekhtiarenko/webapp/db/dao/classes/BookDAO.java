@@ -25,12 +25,13 @@ public class BookDAO implements BookDAOMethods {
 
 
     @Override
-    public List<Book> getBooksByName(String nameOfBook) {
+    public List<Book> getBooksByNameOrAuthor(String bookOrAuthor) {
         List<Book> book = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
-            preparedStatement = connection.prepareStatement(Request.SELECT_BOOK_FROM_BOOK_BY_NAME);
-            preparedStatement.setString(1, "%"+nameOfBook+"%");
+            preparedStatement = connection.prepareStatement(Request.SELECT_BOOK_FROM_BOOK_BY_NAME_OR_AUTHOR);
+            preparedStatement.setString(1, "%"+bookOrAuthor+"%");
+            preparedStatement.setString(2, "%"+bookOrAuthor+"%");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 book.add(readingResultSet(rs));
@@ -41,30 +42,6 @@ public class BookDAO implements BookDAOMethods {
             closing(connection, preparedStatement, rs);
         }
         return book;
-    }
-
-    @Override
-    public List<Book> getBooksByAuthor(String author) {
-        List<Book> book = new ArrayList<>();
-        try {
-            connection = DBManager.getConnection();
-            preparedStatement = connection.prepareStatement(Request.SELECT_BOOK_FROM_BOOK_BY_AUTHOR);
-            preparedStatement.setString(1, "%"+author+"%");
-            rs = preparedStatement.executeQuery();
-            while (rs.next()) {
-                book.add(readingResultSet(rs));
-            }
-        } catch (SQLException sqlException) {
-            Logger.getLogger(sqlException.getMessage());
-        } finally {
-            closing(connection, preparedStatement, rs);
-        }
-        return book;
-    }
-
-    public static void main(String[] args) {
-        BookDAO bookDAO = new BookDAO();
-        System.out.println(bookDAO.getBooksByName("The"));
     }
 
     @Override

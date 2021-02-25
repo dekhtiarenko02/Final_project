@@ -18,7 +18,6 @@ public class ChangeBookService {
     public void changeBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
         Book book = new Book();
 
@@ -41,12 +40,10 @@ public class ChangeBookService {
         book.setNumberOfPages(numberOfPages);
         book.setLanguage(language);
         book.setOrder(isOrder);
-
+        int book_id = Integer.parseInt(req.getParameter("book_id"));
+        bookDAO.updateBook(book,book_id);
 
         req.setAttribute("book",book);
-        int book_id = Integer.parseInt(req.getParameter("book_id"));
-
-        bookDAO.updateBook(book,book_id);
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
     }
 }

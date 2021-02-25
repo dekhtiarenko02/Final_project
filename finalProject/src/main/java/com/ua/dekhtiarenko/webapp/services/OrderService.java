@@ -17,7 +17,6 @@ public class OrderService {
     public void order(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         String bookIdReturn = req.getParameter("orderButton");
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
         bookDAO.updateBookOrderByNameOfBook(bookIdReturn);

@@ -23,7 +23,8 @@ public class Request {
     public static final String SELECT_FROM_BOOK = "SELECT* FROM book";
     public static final String SELECT_ID_FROM_BOOK_BY_NAME = "SELECT id_book FROM book WHERE nameOfBook = ?";
     public static final String SELECT_BOOK_NAME_FROM_BOOK_BY_ID = "SELECT nameOfBook FROM book WHERE id_book = ?";
-    public static final String SELECT_BOOK_FROM_BOOK_BY_NAME = "SELECT* FROM book WHERE nameOfBook LIKE ?";
+    public static final String SELECT_BOOK_FROM_BOOK_BY_NAME = "SELECT* FROM book WHERE nameOfBook = ?";
+    public static final String SELECT_BOOK_FROM_BOOK_BY_NAME_OR_AUTHOR = "SELECT* FROM book WHERE nameOfBook LIKE ? OR author LIKE ?;";
     public static final String SELECT_BOOK_FROM_BOOK_BY_AUTHOR = "SELECT* FROM book WHERE author LIKE ?";
     public static final String UPDATE_BOOK_SET_AVAILABILITY_PLUS = "UPDATE book SET availability = availability + 1 WHERE id_book = ?";
     public static final String UPDATE_BOOK_SET_AVAILABILITY_MINUS = "UPDATE book SET availability = availability - 1 WHERE id_book = ?";

@@ -20,22 +20,11 @@ public class SearchService {
     public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-
         String nameOfBook = req.getParameter("Search");
-
-
-        List<Book> bookList = new ArrayList<>(bookDAO.getBooksByName(nameOfBook));
-
+        List<Book> bookList = new ArrayList<>(bookDAO.getBooksByNameOrAuthor(nameOfBook));
 
         req.setAttribute("bookList",bookList);
         req.getRequestDispatcher("/searchBook.jsp").forward(req, resp);
-    }
-
-    public static void main(String[] args) {
-        BookDAO bookDAO = new BookDAO();
-        Book book = bookDAO.getBookByName("The");
-        System.out.println(book);
     }
 }

@@ -41,7 +41,7 @@
             <div class="books_catalog_overlay"> </div>
         </div>
         <div class = "header">
-                <a href="index.jsp?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
+                <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                    height="64">
                 </a>
             <nav id="notHiddenLinks">
@@ -52,39 +52,39 @@
             <nav id="hiddenLinks">
                 <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
                 <span class="stick">|</span>
-                <a class = "link changeOnClick" href="index.jsp?id=${idVal}">Log out</a>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
             </nav>
         </div>
         <div id="hiddenBlock">
         </div>
         <form action="ChangeBookServlet?id=${idVal}&book_id=${idBook}" method="post">
         <div id="changeBook">
-                  <div class="dws-input">
-                      <input type = "text" name="Genre" placeholder="Genre">
+                  <div class="dws-input-change">
+                      <input class="input-change" type = "text" name="Genre" placeholder="Genre">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="Author" placeholder="Author">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="Author" placeholder="Author">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="NameOfBook" placeholder="Name Of Book">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="NameOfBook" placeholder="Name Of Book">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="Publisher" placeholder="Publisher">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="Publisher" placeholder="Publisher">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="Year" placeholder="Year">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="Year" placeholder="Year">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="Availability" placeholder="Availability">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="Availability" placeholder="Availability">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="NumberOfPages" placeholder="Number Of Pages">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="NumberOfPages" placeholder="Number Of Pages">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="Language" placeholder="Language">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="Language" placeholder="Language">
                   </div>
-                  <div class="dws-input">
-                    <input type = "text" name="IsOrder" placeholder="IsOrder">
+                  <div class="dws-input-change">
+                    <input class="input-change" type = "text" name="IsOrder" placeholder="IsOrder">
                   </div>
                   <input class ="dws-submit" type="submit" value = "Confirm">
         </div>

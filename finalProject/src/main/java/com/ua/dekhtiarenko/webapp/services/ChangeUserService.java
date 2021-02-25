@@ -18,7 +18,6 @@ public class ChangeUserService {
     public void changeUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
         User user = new User();
 
@@ -33,12 +32,10 @@ public class ChangeUserService {
         user.setLibrarian(librarian);
         user.setAdmin(admin);
         user.setBlocked(blocked);
-
-        req.setAttribute("user",user);
-
         int user_id = Integer.parseInt(req.getParameter("user_id"));
         userDAO.updateUser(user, user_id);
 
+        req.setAttribute("user",user);
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
     }
 }

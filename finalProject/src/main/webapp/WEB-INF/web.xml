@@ -132,4 +132,12 @@
         <servlet-name>DeleteBookServlet</servlet-name>
         <url-pattern>/DeleteBookServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>MainPageServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.MainPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainPageServlet</servlet-name>
+        <url-pattern>/MainPageServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

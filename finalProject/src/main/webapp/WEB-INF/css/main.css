@@ -288,10 +288,25 @@ html{
     color: #804621;
 }
 
+.mainInfoBook{
+    text-align:bottom;
+    font-size:15px;
+    margin-left:15px;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
 .bookIMG{
     height: 260px;
     width: 190px;
     margin-left: 5px;
+}
+
+.mainBooksImg{
+    height: 270px;
+    width: 200px;
+    border-radius: 5%;
+    margin-left: 15px;
+    margin-top: 15px;
 }
 
 .search{
@@ -447,7 +462,7 @@ position: fixed;
     width: 90px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 180px;
+    margin-left: 185px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -462,7 +477,7 @@ position: fixed;
     width: 90px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 540px;
+    margin-left: 560px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -476,7 +491,7 @@ position: fixed;
     width: 90px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 650px;
+    margin-left: 685px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -490,7 +505,7 @@ position: fixed;
     width: 90px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 320px;
+    margin-left: 310px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -504,7 +519,7 @@ position: fixed;
     width: 90px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 430px;
+    margin-left: 435px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -578,7 +593,7 @@ position: fixed;
     width: 100px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 210px;
+    margin-left: 180px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -593,7 +608,7 @@ position: fixed;
     width: 100px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 350px;
+    margin-left: 300px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -608,13 +623,29 @@ position: fixed;
     color: #804621;
 }
 
+.mainBook{
+    display:inline-block;
+    margin-left:50px;
+}
+
+.mainPage{
+    height: 350px;
+    width:1570px;
+    transform:translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: #F5DCCA;
+    position:absolute;
+    top:32%;
+    left:55%;
+}
+
 .subscriptionBookOfUserButton{
     position:absolute;
     height: 40px;
     width: 100px;
     font-size: 16px;
     margin-top: 20px;
-    margin-left: 490px;
+    margin-left: 420px;
     background-color:#F5DCCA;
     color:black;
     text-decoration: none;
@@ -654,11 +685,11 @@ position: fixed;
 
 #insertContainer{
     width: 25%;
-    height: 91%;
+    height: 95%;
     background-color: #F5DCCA;
     border-radius: 2%;
-    margin-left: 37%;
-    margin-top: 4%;
+    margin-left: 35%;
+    margin-top: 5%;
     text-align: center;
     position: absolute;
 }
@@ -699,9 +730,10 @@ position: fixed;
     display:none;
 }
 
+
 #changeBook{
     width: 25%;
-    height: 82%;
+    height: 87%;
     background-color: #F5DCCA;
     border-radius: 2%;
     margin-left: 35%;
@@ -831,6 +863,38 @@ th:first-child, td:first-child {
     text-align: center;
 }
 
+.input-change{
+    margin-top:15px;
+}
+
+.input-insert{
+    margin-top:15px;
+}
+
+.dws-input-insert input{
+    width: 300px;
+    height: 45px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 2px solid #444343;
+    padding-left: 8px;
+    outline: none;
+}
+
+.dws-input-change input{
+    width: 300px;
+    height: 45px;
+    font-size: 18px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    border: 2px solid #444343;
+    padding-left: 8px;
+    outline: none;
+}
+
 .dws-input input{
     width: 300px;
     height: 45px;
@@ -857,6 +921,7 @@ th:first-child, td:first-child {
     border: 1px solid black;
     border-radius: 50%;
 }
+
 
 .dws-submit{
     padding: 13px 30px;

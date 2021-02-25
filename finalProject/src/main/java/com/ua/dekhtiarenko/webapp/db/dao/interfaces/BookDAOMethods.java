@@ -19,9 +19,7 @@ public interface BookDAOMethods {
 
     List<Book> getListBook();
 
-    List<Book> getBooksByName(String nameOfBook);
-
-    List<Book> getBooksByAuthor(String author);
+    List<Book> getBooksByNameOrAuthor(String bookOrAuthor);
 
     Book readingResultSet(ResultSet resultSet);
 

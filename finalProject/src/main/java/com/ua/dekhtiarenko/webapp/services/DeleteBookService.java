@@ -17,7 +17,6 @@ public class DeleteBookService {
     public void deleteBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-
         BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
         int book_id = Integer.parseInt(req.getParameter("book_id"));
 
