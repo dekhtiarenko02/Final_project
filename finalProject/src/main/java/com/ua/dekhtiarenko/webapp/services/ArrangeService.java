@@ -1,9 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -23,16 +23,16 @@ public class ArrangeService {
     public void arrange(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
-        SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
-        User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        SubscriptionDAOImpl subscriptionDAOImpl = (SubscriptionDAOImpl) servletContext.getAttribute("subscriptionDAO");
+        SubscriptionBookDAOImpl subscriptionBookDAOImpl = (SubscriptionBookDAOImpl) servletContext.getAttribute("subscriptionBookDAO");
+        User user = userDAOImpl.getUserById(Integer.parseInt(req.getParameter("id")));
 
-        int bookId = bookDAO.getBookIdByName(req.getParameter("arrangeButton"));
-        int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
-        int bookAvailability = bookDAO.getAvailabilityByBookId(bookId);
-        List<SubscriptionBook> subscriptionBook = subscriptionBookDAO.getListSubscriptionBook(user.getId());
+        int bookId = bookDAOImpl.getBookIdByName(req.getParameter("arrangeButton"));
+        int subscriptionId = subscriptionDAOImpl.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
+        int bookAvailability = bookDAOImpl.getAvailabilityByBookId(bookId);
+        List<SubscriptionBook> subscriptionBook = subscriptionBookDAOImpl.getListSubscriptionBook(user.getId());
         boolean userHaveBook = false;
 
         if (bookAvailability > 0) {
@@ -43,8 +43,8 @@ public class ArrangeService {
                 }
             }
             if (!userHaveBook) {
-                subscriptionBookDAO.insertSubscriptionBook(bookId, subscriptionId);
-                bookDAO.reduceBookAvailabilityById(bookId);
+                subscriptionBookDAOImpl.insertSubscriptionBook(bookId, subscriptionId);
+                bookDAOImpl.reduceBookAvailabilityById(bookId);
             }
         }
 

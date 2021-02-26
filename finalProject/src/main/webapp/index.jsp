@@ -51,14 +51,24 @@
             </nav>
       </div>
       <form action="MainPageServlet?id=${idVal}" method="post">
-      <div class="mainPage">
-           <c:forEach var="book" items="${bookList}" end="4">
+      <strong class="popular">Popular </strong>
+      <div class="mainPageAvailabilityLess">
+           <c:forEach var="book" items="${bookListAvailabilityLess}" end="4">
            <div class="mainBook">
            <img class="mainBooksImg" src="${book.getUrlImg()}">
            	    <p class="mainInfoBook">${book.nameOfBook}.</p>
            </div>
            </c:forEach>
       </div>
+      <strong class="muchInStock">Much in stock</strong>
+      <div class="mainPageAvailabilityMore">
+            <c:forEach var="book" items="${bookListAvailabilityMore}" end="4">
+            <div class="mainBook">
+            <img class="mainBooksImg" src="${book.getUrlImg()}">
+            	    <p class="mainInfoBook">${book.nameOfBook}.</p>
+            </div>
+            </c:forEach>
+            </div>
       </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>

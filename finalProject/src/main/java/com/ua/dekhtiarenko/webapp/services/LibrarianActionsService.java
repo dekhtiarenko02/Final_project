@@ -1,9 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.db.entity.Subscription;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
@@ -25,15 +25,15 @@ public class LibrarianActionsService {
     public void librarianActions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
-        SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        SubscriptionDAOImpl subscriptionDAOImpl = (SubscriptionDAOImpl) servletContext.getAttribute("subscriptionDAO");
+        SubscriptionBookDAOImpl subscriptionBookDAOImpl = (SubscriptionBookDAOImpl) servletContext.getAttribute("subscriptionBookDAO");
 
-        List<User> userList = userDAO.getUserList();
-        List<Subscription> subscriptionList = subscriptionDAO.getSubscriptionList();
-        List<SubscriptionBook> subscriptionBookList = subscriptionBookDAO.getListSubscriptionBook();
-        List<Book> bookList = bookDAO.getListBook();
+        List<User> userList = userDAOImpl.getUserList();
+        List<Subscription> subscriptionList = subscriptionDAOImpl.getSubscriptionList();
+        List<SubscriptionBook> subscriptionBookList = subscriptionBookDAOImpl.getListSubscriptionBook();
+        List<Book> bookList = bookDAOImpl.getListBook();
 
         req.setAttribute("bookList", bookList);
         req.setAttribute("userList", userList);

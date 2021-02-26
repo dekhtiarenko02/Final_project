@@ -1,9 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -24,16 +24,16 @@ public class ReturnService {
 
         ServletContext servletContext = req.getServletContext();
 
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
-        SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        SubscriptionDAOImpl subscriptionDAOImpl = (SubscriptionDAOImpl) servletContext.getAttribute("subscriptionDAO");
+        SubscriptionBookDAOImpl subscriptionBookDAOImpl = (SubscriptionBookDAOImpl) servletContext.getAttribute("subscriptionBookDAO");
 
-        User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
-        int bookIdReturn = bookDAO.getBookIdByName(req.getParameter("returnButton"));
-        int subscriptionId = subscriptionDAO.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
-        int bookAvailability = bookDAO.getAvailabilityByBookId(bookIdReturn);
-        List<SubscriptionBook> subscriptionBook = subscriptionBookDAO.getListSubscriptionBook(user.getId());
+        User user = userDAOImpl.getUserById(Integer.parseInt(req.getParameter("id")));
+        int bookIdReturn = bookDAOImpl.getBookIdByName(req.getParameter("returnButton"));
+        int subscriptionId = subscriptionDAOImpl.getSubscriptionIdByUserId(Integer.parseInt(req.getParameter("id")));
+        int bookAvailability = bookDAOImpl.getAvailabilityByBookId(bookIdReturn);
+        List<SubscriptionBook> subscriptionBook = subscriptionBookDAOImpl.getListSubscriptionBook(user.getId());
         boolean userHaveBook = false;
 
         if (bookAvailability >= 0) {
@@ -44,8 +44,8 @@ public class ReturnService {
                 }
             }
             if(userHaveBook){
-                subscriptionBookDAO.deleteSubscriptionBook(bookIdReturn, subscriptionId);
-                bookDAO.increaseBookAvailabilityById(bookIdReturn);
+                subscriptionBookDAOImpl.deleteSubscriptionBook(bookIdReturn, subscriptionId);
+                bookDAOImpl.increaseBookAvailabilityById(bookIdReturn);
             }
         }
 

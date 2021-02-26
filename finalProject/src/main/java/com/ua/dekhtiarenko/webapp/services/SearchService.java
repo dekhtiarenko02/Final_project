@@ -1,7 +1,8 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,11 +21,47 @@ public class SearchService {
     public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         String nameOfBook = req.getParameter("Search");
-        List<Book> bookList = new ArrayList<>(bookDAO.getBooksByNameOrAuthor(nameOfBook));
+        Validation validation = (Validation) servletContext.getAttribute("validation");
+        List<Book> bookList = new ArrayList<>(bookDAOImpl.getBooksByNameOrAuthor(nameOfBook));
+        List<Integer> pageList = new ArrayList<>();
 
-        req.setAttribute("bookList",bookList);
+        if (bookList.size() % 2 == 0) {
+            for (int i = 0; i < bookList.size() / 2; i++) {
+                pageList.add(i + 1);
+            }
+        } else {
+            for (int i = 0; i < bookList.size() / 2 + 1; i++) {
+                pageList.add(i + 1);
+            }
+        }
+
+        int counter = 0;
+        int index = 0;
+
+        while (true) {
+            if (req.getParameter("page") == null || req.getParameter("page").equals("1")) {
+                break;
+            } else if (req.getParameter("page").equals("2")) {
+                if (counter == 2) {
+                    break;
+                }
+                bookList.remove(index);
+            } else if (req.getParameter("page").equals("3")) {
+                if (counter == 4) {
+                    break;
+                }
+                bookList.remove(index);
+            }
+            counter++;
+        }
+
+        if (validation.isValidText(nameOfBook)){
+            req.setAttribute("bookList",bookList);
+        }
+
+        req.setAttribute("pageList", pageList);
         req.getRequestDispatcher("/searchBook.jsp").forward(req, resp);
     }
 }

@@ -1,7 +1,8 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,21 +19,34 @@ public class InsertBookService {
     public void insertBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        Validation validation = (Validation) servletContext.getAttribute("validation");
 
         Book book = new Book();
-        book.setGenre(req.getParameter("Genre"));
-        book.setUrlImg(req.getParameter("UrlImg"));
-        book.setAuthor(req.getParameter("Author"));
-        book.setNameOfBook(req.getParameter("NameOfBook"));
-        book.setPublisher(req.getParameter("Publisher"));
-        book.setLanguage(req.getParameter("Language"));
-        book.setPlot(req.getParameter("Plot"));
-        book.setOrder(false);
-        book.setYear(Integer.parseInt(req.getParameter("year")));
-        book.setAvailability(Integer.parseInt(req.getParameter("availability")));
-        book.setNumberOfPages(Integer.parseInt(req.getParameter("numberOfPages")));
-        bookDAO.insertBook(book);
+
+        String genre = req.getParameter("Genre");
+        String author = req.getParameter("Author");
+        String nameOfBook = req.getParameter("NameOfBook");
+        String publisher = req.getParameter("Publisher");
+        String language = req.getParameter("Language");
+
+        if (validation.isValidText(genre) && validation.isValidAuthorOrPublisher(author) &&
+                validation.isValidText(nameOfBook) && validation.isValidAuthorOrPublisher(publisher) &&
+                validation.isValidText(language)
+        ) {
+            book.setGenre(req.getParameter("Genre"));
+            book.setUrlImg(req.getParameter("UrlImg"));
+            book.setAuthor(req.getParameter("Author"));
+            book.setNameOfBook(req.getParameter("NameOfBook"));
+            book.setPublisher(req.getParameter("Publisher"));
+            book.setLanguage(req.getParameter("Language"));
+            book.setPlot(req.getParameter("Plot"));
+            book.setOrder(false);
+            book.setYear(Integer.parseInt(req.getParameter("year")));
+            book.setAvailability(Integer.parseInt(req.getParameter("availability")));
+            book.setNumberOfPages(Integer.parseInt(req.getParameter("numberOfPages")));
+            bookDAOImpl.insertBook(book);
+        }
 
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
     }

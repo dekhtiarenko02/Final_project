@@ -1,8 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -19,8 +20,8 @@ public class RegisterService {
     public void registration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        SubscriptionDAOImpl subscriptionDAOImpl = (SubscriptionDAOImpl) servletContext.getAttribute("subscriptionDAO");
 
         User user = new User();
         String email = req.getParameter("Email");
@@ -28,17 +29,22 @@ public class RegisterService {
         String surname = req.getParameter("Surname");
         String password = req.getParameter("Password");
 
-        user.setEmail(email);
-        user.setName(name);
-        user.setSurname(surname);
-        user.setLibrarian(false);
-        user.setAdmin(false);
-        user.setBlocked(false);
-        user.setPassword(password);
-        userDAO.insertUser(user);
-        user.setId(userDAO.getUserIdByEmail(user.getEmail()));
+        Validation validation = (Validation) servletContext.getAttribute("validation");
 
-        subscriptionDAO.insertSubscription(user);
-        req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        if (validation.isValidText(name) && validation.isValidText(surname)
+                && validation.isValidPassword(password) && validation.isValidEmail(email)) {
+            user.setEmail(email);
+            user.setName(name);
+            user.setSurname(surname);
+            user.setLibrarian(false);
+            user.setAdmin(false);
+            user.setBlocked(false);
+            user.setPassword(password);
+            userDAOImpl.insertUser(user);
+            user.setId(userDAOImpl.getUserIdByEmail(user.getEmail()));
+            subscriptionDAOImpl.insertSubscription(user);
+        }
+
+        req.getRequestDispatcher("MainPageServlet").forward(req, resp);
     }
 }

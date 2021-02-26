@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public interface SubscriptionDAOMethods {
+public interface SubscriptionDAO {
 
     void insertSubscription(User user);
 

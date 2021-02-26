@@ -1,6 +1,6 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,8 +18,8 @@ public class OrderService {
 
         ServletContext servletContext = req.getServletContext();
         String bookIdReturn = req.getParameter("orderButton");
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        bookDAO.updateBookOrderByNameOfBook(bookIdReturn);
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        bookDAOImpl.updateBookOrderByNameOfBook(bookIdReturn);
 
         req.setAttribute("id",req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);

@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public interface UserDAOMethods {
+public interface UserDAO {
 
     void insertUser(User user);
 

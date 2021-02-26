@@ -2,7 +2,7 @@ package com.ua.dekhtiarenko.webapp.db.dao.classes;
 
 import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
-import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAOMethods;
+import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public class UserDAO implements UserDAOMethods {
+public class UserDAOImpl implements UserDAO {
 
     private static Connection connection = null;
     private static PreparedStatement preparedStatement = null;

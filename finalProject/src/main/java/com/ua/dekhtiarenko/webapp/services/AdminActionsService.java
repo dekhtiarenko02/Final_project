@@ -1,7 +1,7 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -21,10 +21,10 @@ public class AdminActionsService {
     public void adminActions(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        List<User> userList = userDAO.getUserList();
-        List<Book> bookList = bookDAO.getListBook();
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        List<User> userList = userDAOImpl.getUserList();
+        List<Book> bookList = bookDAOImpl.getListBook();
 
         req.setAttribute("bookList", bookList);
         req.setAttribute("userList", userList);

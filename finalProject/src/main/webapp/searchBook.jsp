@@ -51,7 +51,7 @@
             </nav>
     </div>
         <div class="catalogBook">
-        <c:forEach var="book" items="${bookList}">
+        <c:forEach var="book" items="${bookList}" end="1">
         <c:if test="${book != null}">
              <div class="bookStyle">
                 <div class="titleBook">
@@ -77,6 +77,11 @@
                 <button class="arrange-book" type="submit" name="arrangeButton" value="${book.getNameOfBook()}">Arrange book</button>
                 <button class="return-book" type="submit">Return book</button>
             </form>
+        </div>
+        <div class="pagination">
+            <c:forEach var="pages" items="${pageList}">
+                <a href="SearchServlet?id=${idVal}&page=${pages}" class="active">${pages}</a>
+            </c:forEach>
         </div>
     </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

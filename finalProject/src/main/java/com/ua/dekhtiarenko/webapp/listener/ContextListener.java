@@ -1,10 +1,11 @@
 package com.ua.dekhtiarenko.webapp.listener;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.services.*;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -20,10 +21,12 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
 
-        BookDAO bookDAO = new BookDAO();
-        SubscriptionBookDAO subscriptionBookDAO = new SubscriptionBookDAO();
-        SubscriptionDAO subscriptionDAO = new SubscriptionDAO();
-        UserDAO userDAO = new UserDAO();
+        BookDAOImpl bookDAOImpl = new BookDAOImpl();
+        SubscriptionBookDAOImpl subscriptionBookDAOImpl = new SubscriptionBookDAOImpl();
+        SubscriptionDAOImpl subscriptionDAOImpl = new SubscriptionDAOImpl();
+        UserDAOImpl userDAOImpl = new UserDAOImpl();
+
+        Validation validation = new Validation();
 
         AdminActionsService adminActionsService = new AdminActionsService();
         ArrangeService arrangeService = new ArrangeService();
@@ -39,6 +42,7 @@ public class ContextListener implements ServletContextListener {
         InsertBookService insertBookService = new InsertBookService();
         DeleteBookService deleteBookService = new DeleteBookService();
         ChangeUserService changeUserService = new ChangeUserService();
+        ChangeBookService changeBookService = new ChangeBookService();
         MainPageService mainPageService = new MainPageService();
 
 
@@ -58,13 +62,14 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("searchService", searchService);
         servletContext.setAttribute("insertBookService", insertBookService);
         servletContext.setAttribute("mainPageService", mainPageService);
+        servletContext.setAttribute("changeBookService", changeBookService);
 
+        servletContext.setAttribute("validation", validation);
 
-
-        servletContext.setAttribute("bookDAO", bookDAO);
-        servletContext.setAttribute("subscriptionBookDAO", subscriptionBookDAO);
-        servletContext.setAttribute("subscriptionDAO", subscriptionDAO);
-        servletContext.setAttribute("userDAO", userDAO);
+        servletContext.setAttribute("bookDAO", bookDAOImpl);
+        servletContext.setAttribute("subscriptionBookDAO", subscriptionBookDAOImpl);
+        servletContext.setAttribute("subscriptionDAO", subscriptionDAOImpl);
+        servletContext.setAttribute("userDAO", userDAOImpl);
 
     }
 

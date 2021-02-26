@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public interface SubscriptionBookDAOMethods {
+public interface SubscriptionBookDAO {
 
     void insertSubscriptionBook(int bookId, int subscriptionId);
 

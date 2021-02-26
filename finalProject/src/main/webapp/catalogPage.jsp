@@ -17,7 +17,6 @@
                 </a>
             <%
                 String genreParam = request.getParameter("genre");
-                request.setAttribute("genreVar",genreParam);
                 String idParam = request.getParameter("id");
                 request.setAttribute("idVal", idParam);
             %>
@@ -51,8 +50,14 @@
                 <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
             </nav>
     </div>
+    <form action="" method="post">
+    <button id="userListButton" class="listOfUsersButton" type="submit">User list</button>
+    <button id="subscriptionButton" class="subscriptionOfUserButton" type="submit">Subscription</button>
+    <button id="subscriptionBookButton" class="subscriptionBookOfUserButton" type="submit">Subscription book</button>
+    <button id="bookListButton" class="bookListButton" type="submit">Book list</button>
+    </form>
         <div class="catalogBook">
-             <c:forEach var="book" items="${bookList}">
+             <c:forEach var="book" items="${bookList}" end="1">
              <div class="bookStyle">
                 <div class="titleBook">
                     <p class="indent">Genre: ${book.getGenre()}</p>
@@ -93,13 +98,11 @@
         </form>
         </div>
             </c:forEach>
-            <div class="center">
-                <div class="pagination">
-                    <a href="#" class="active">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                  </div>
-                </div>
+            <div class="pagination">
+                <c:forEach var="pages" items="${pageList}">
+                    <a href="CatalogServlet?genre=${genre}&id=${idVal}&page=${pages}" class="active">${pages}</a>
+                </c:forEach>
+            </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>

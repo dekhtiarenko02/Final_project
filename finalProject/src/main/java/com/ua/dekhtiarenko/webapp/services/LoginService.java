@@ -1,6 +1,7 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,13 +18,15 @@ public class LoginService {
     public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         ServletContext servletContext = req.getServletContext();
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        Validation validation = (Validation) servletContext.getAttribute("validation");
 
         String email = req.getParameter("Email");
         String password = req.getParameter("Password");
 
-        if (userDAO.exists(email, password) && !userDAO.getUserById(userDAO.getUserIdByEmail(email)).getBlocked()) {
-            req.setAttribute("id", userDAO.getUserIdByEmail(email));
+        if (userDAOImpl.exists(email, password) && !userDAOImpl.getUserById(userDAOImpl.getUserIdByEmail(email)).getBlocked()
+                && validation.isValidEmail(email) && validation.isValidPassword(password)) {
+            req.setAttribute("id", userDAOImpl.getUserIdByEmail(email));
             req.getRequestDispatcher("MainPageServlet").forward(req, resp);
         }
     }

@@ -1,6 +1,7 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.validation.Validation;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,10 +18,15 @@ public class DeleteBookService {
     public void deleteBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ServletContext servletContext = req.getServletContext();
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
-        int book_id = Integer.parseInt(req.getParameter("book_id"));
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
+        Validation validation = (Validation) servletContext.getAttribute("validation");
 
-        bookDAO.deleteBook(book_id);
-        req.getRequestDispatcher("/index.jsp").forward(req,resp);
+        String id = req.getParameter("book_id");
+        if (validation.isValidNumbers(id)) {
+            int book_id = Integer.parseInt(req.getParameter("book_id"));
+            bookDAOImpl.deleteBook(book_id);
+        }
+
+        req.getRequestDispatcher("MainPageServlet").forward(req, resp);
     }
 }

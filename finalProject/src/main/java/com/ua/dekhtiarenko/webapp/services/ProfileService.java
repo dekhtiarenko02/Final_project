@@ -1,9 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAO;
-import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAO;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
+import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -26,13 +26,13 @@ public class ProfileService {
     public void profile(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         ServletContext servletContext = req.getServletContext();
-        UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
-        SubscriptionBookDAO subscriptionBookDAO = (SubscriptionBookDAO) servletContext.getAttribute("subscriptionBookDAO");
-        SubscriptionDAO subscriptionDAO = (SubscriptionDAO) servletContext.getAttribute("subscriptionDAO");
-        BookDAO bookDAO = (BookDAO) servletContext.getAttribute("bookDAO");
+        UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
+        SubscriptionBookDAOImpl subscriptionBookDAOImpl = (SubscriptionBookDAOImpl) servletContext.getAttribute("subscriptionBookDAO");
+        SubscriptionDAOImpl subscriptionDAOImpl = (SubscriptionDAOImpl) servletContext.getAttribute("subscriptionDAO");
+        BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
 
-        User user = userDAO.getUserById(Integer.parseInt(req.getParameter("id")));
-        List<SubscriptionBook> subscriptionBookList = subscriptionBookDAO.getListSubscriptionBook(user.getId());
+        User user = userDAOImpl.getUserById(Integer.parseInt(req.getParameter("id")));
+        List<SubscriptionBook> subscriptionBookList = subscriptionBookDAOImpl.getListSubscriptionBook(user.getId());
         List<String> bookList = new ArrayList<>();
 
         if (!subscriptionBookList.isEmpty()) {
@@ -40,7 +40,7 @@ public class ProfileService {
             Date date = (Date) subscriptionBookList.get(0).getDateOfPurchase();
 
             for (SubscriptionBook subscriptionBook : subscriptionBookList) {
-                bookList.add(bookDAO.getNameOfBookById(subscriptionBook.getBook_id()));
+                bookList.add(bookDAOImpl.getNameOfBookById(subscriptionBook.getBook_id()));
                 if (date.after(subscriptionBook.getDateOfPurchase())) {
                     date = (Date) subscriptionBook.getDateOfPurchase();
                 }
@@ -50,9 +50,9 @@ public class ProfileService {
             date.setTime(date.getTime() + TimeUnit.DAYS.toMillis(7));
 
             if (dateNow.after(date)) {
-                req.setAttribute("penalty", subscriptionDAO.getPenaltyFromSubscriptionByUserId(user.getId()) + 3);
+                req.setAttribute("penalty", subscriptionDAOImpl.getPenaltyFromSubscriptionByUserId(user.getId()) + 3);
             } else {
-                req.setAttribute("penalty", subscriptionDAO.getPenaltyFromSubscriptionByUserId(user.getId()));
+                req.setAttribute("penalty", subscriptionDAOImpl.getPenaltyFromSubscriptionByUserId(user.getId()));
             }
             req.setAttribute("date", date);
             req.setAttribute("bookList", bookList);

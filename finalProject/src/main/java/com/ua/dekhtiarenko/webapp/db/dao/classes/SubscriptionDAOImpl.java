@@ -2,7 +2,7 @@ package com.ua.dekhtiarenko.webapp.db.dao.classes;
 
 import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
-import com.ua.dekhtiarenko.webapp.db.dao.interfaces.SubscriptionDAOMethods;
+import com.ua.dekhtiarenko.webapp.db.dao.interfaces.SubscriptionDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.Subscription;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public class SubscriptionDAO implements SubscriptionDAOMethods {
+public class SubscriptionDAOImpl implements SubscriptionDAO {
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;

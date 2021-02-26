@@ -172,13 +172,12 @@ html{
     font-family: 'Noto Sans JP', sans-serif;
 }
 
-.center {
-    text-align: center;
-}
 
 .pagination {
     display: inline-block;
-    left:40%;
+    text-align:center;
+    left:42%;
+    position:absolute;
 }
 
 .pagination a {
@@ -625,17 +624,49 @@ position: fixed;
 
 .mainBook{
     display:inline-block;
-    margin-left:50px;
+    margin-top: 68px;
+    margin-left:70px;
 }
 
-.mainPage{
-    height: 350px;
-    width:1570px;
+.mainPageAvailabilityLess{
+    height: 400px;
+    width:1550px;
     transform:translate(-50%, -50%);
     border: 1px solid black;
     background-color: #F5DCCA;
     position:absolute;
     top:32%;
+    left:55%;
+}
+
+.popular{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 30px;
+    margin-top: 120px;
+    margin-left: 300px;
+    color:black;
+    position:absolute;
+    z-index: 1;
+}
+
+.muchInStock{
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 30px;
+    margin-top: 575px;
+    margin-left: 300px;
+    color:black;
+    position:absolute;
+    z-index: 1;
+}
+
+.mainPageAvailabilityMore{
+    height: 400px;
+    width:1550px;
+    transform:translate(-50%, -50%);
+    border: 1px solid black;
+    background-color: #F5DCCA;
+    position:absolute;
+    top:78%;
     left:55%;
 }
 

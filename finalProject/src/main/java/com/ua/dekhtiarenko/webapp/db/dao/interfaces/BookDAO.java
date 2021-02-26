@@ -11,11 +11,11 @@ import java.util.List;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public interface BookDAOMethods {
+public interface BookDAO {
 
     void insertBook(Book book);
 
-    List<Book> getListBook(String genre);
+    List<Book> getListBookByGenre(String genre);
 
     List<Book> getListBook();
 

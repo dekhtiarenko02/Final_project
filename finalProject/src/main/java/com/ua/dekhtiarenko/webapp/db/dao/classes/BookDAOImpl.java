@@ -2,7 +2,7 @@ package com.ua.dekhtiarenko.webapp.db.dao.classes;
 
 import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
-import com.ua.dekhtiarenko.webapp.db.dao.interfaces.BookDAOMethods;
+import com.ua.dekhtiarenko.webapp.db.dao.interfaces.BookDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public class BookDAO implements BookDAOMethods {
+public class BookDAOImpl implements BookDAO {
 
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
@@ -115,7 +115,7 @@ public class BookDAO implements BookDAOMethods {
     }
 
     @Override
-    public List<Book> getListBook(String genre) {
+    public List<Book> getListBookByGenre(String genre) {
         List<Book> bookList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
