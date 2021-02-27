@@ -24,13 +24,13 @@ public class Validation {
         return Pattern.matches("^(?:[-+0-9]\\d*|0)?(?:\\.\\d+)?$",id);
     }
 
-    public boolean isValidUrlImg(String url){
+/*    public boolean isValidUrlImg(String url){
         return Pattern.matches("(http(s?):/)(/[^/]+)+\" + \"\\.(?:jpg|gif|png)", url);
     }
 
     public boolean isValidPlot(String plot){
         return Pattern.matches("", plot);
-    }
+    }*/
 
     public boolean isValidBool(String bool){
         return Pattern.matches("(true|false)", bool);

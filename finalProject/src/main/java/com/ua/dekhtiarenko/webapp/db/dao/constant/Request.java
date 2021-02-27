@@ -1,6 +1,7 @@
 package com.ua.dekhtiarenko.webapp.db.dao.constant;
 
 /**
+ * Constants.
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 

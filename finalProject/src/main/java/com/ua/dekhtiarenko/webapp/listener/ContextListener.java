@@ -12,6 +12,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 /**
+ * Context listener.
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
@@ -44,7 +45,7 @@ public class ContextListener implements ServletContextListener {
         ChangeUserService changeUserService = new ChangeUserService();
         ChangeBookService changeBookService = new ChangeBookService();
         MainPageService mainPageService = new MainPageService();
-
+        LanguageService languageService = new LanguageService();
 
 
         servletContext.setAttribute("changeUserService", changeUserService);
@@ -63,6 +64,7 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("insertBookService", insertBookService);
         servletContext.setAttribute("mainPageService", mainPageService);
         servletContext.setAttribute("changeBookService", changeBookService);
+        servletContext.setAttribute("languageService", languageService);
 
         servletContext.setAttribute("validation", validation);
 

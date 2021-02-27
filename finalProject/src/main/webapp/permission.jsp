@@ -47,6 +47,9 @@
                     <input class ="search-submit" type="submit" value="Confirm">
                 </div>
             </form>
+            <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
+               height="64">
+            </a>
             <nav id="notHiddenLinks">
                 <a class = "link" href="login.jsp"><label><fmt:message key="log_in"/></label></a>
                 <span class="stick">|</span>
@@ -57,27 +60,13 @@
                 <span class="stick">|</span>
                 <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}"><label><fmt:message key="log_out"/></label></a>
             </nav>
-      </div>
-      <form action="MainPageServlet?id=${idVal}" method="post">
-      <strong class="popular"><label><fmt:message key="popular"/></label></strong>
-      <div class="mainPageAvailabilityLess">
-           <c:forEach var="book" items="${bookListAvailabilityLess}" end="4">
-           <div class="mainBook">
-           <img class="mainBooksImg" src="${book.getUrlImg()}">
-           	    <p class="mainInfoBook">${book.nameOfBook}.</p>
-           </div>
-           </c:forEach>
-      </div>
-      <strong class="muchInStock"><label><fmt:message key="muchInStock"/></label></strong>
-      <div class="mainPageAvailabilityMore">
-            <c:forEach var="book" items="${bookListAvailabilityMore}" end="4">
-            <div class="mainBook">
-            <img class="mainBooksImg" src="${book.getUrlImg()}">
-            	    <p class="mainInfoBook">${book.nameOfBook}.</p>
-            </div>
-            </c:forEach>
-            </div>
-      </form>
+        </div>
+        <div class="permissionBlock">
+             <form action="MainPageServlet?id=${idVal}" method="post">
+                   <p class="permissionText"><label><fmt:message key="permission"/></label></p>
+                   <button id="mainPageSubmit" type="submit"><label><fmt:message key="mainPage"/></label></button>
+             </form>
+        </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/catalogScript.js"></script>
         <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

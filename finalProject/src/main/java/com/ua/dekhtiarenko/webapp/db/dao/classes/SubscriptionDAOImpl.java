@@ -24,6 +24,11 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
 
+    /**
+     * Insert subscription.
+     *
+     * @param user
+     */
     @Override
     public void insertSubscription(User user) {
         try {
@@ -39,6 +44,12 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         }
     }
 
+    /**
+     * Return penalty from subscription by user id
+     *
+     * @param userId
+     * @return penalty.
+     */
     @Override
     public int getPenaltyFromSubscriptionByUserId(int userId) {
         int penalty = 0;
@@ -58,6 +69,11 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         return penalty;
     }
 
+    /**
+     * Return subscription list.
+     *
+     * @return subscription list.
+     */
     @Override
     public List<Subscription> getSubscriptionList() {
         List<Subscription> subscriptionList = new ArrayList<>();
@@ -76,6 +92,12 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         return subscriptionList;
     }
 
+    /**
+     * Returns book by resultSet.
+     *
+     * @param resultSet
+     * @return subscription book.
+     */
     @Override
     public Subscription readingResultSet(ResultSet resultSet) {
         Subscription subscription = new Subscription();
@@ -89,6 +111,12 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         return subscription;
     }
 
+    /**
+     * Return subscription id by user id.
+     *
+     * @param userId
+     * @return subscription id.
+     */
     @Override
     public int getSubscriptionIdByUserId(int userId) {
         int id = 0;
@@ -108,6 +136,9 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         return id;
     }
 
+    /**
+     * Closes resources.
+     */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
         try {

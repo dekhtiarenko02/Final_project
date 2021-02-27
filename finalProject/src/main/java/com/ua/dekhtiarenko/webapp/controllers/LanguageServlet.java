@@ -1,7 +1,7 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
-import com.ua.dekhtiarenko.webapp.services.AdminActionsService;
+import com.ua.dekhtiarenko.webapp.services.LanguageService;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
-public class AdminActionsServlet extends HttpServlet {
+public class LanguageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,10 +26,9 @@ public class AdminActionsServlet extends HttpServlet {
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
-
         ServletContext servletContext = req.getServletContext();
 
-        AdminActionsService adminActionsService = (AdminActionsService) servletContext.getAttribute("adminActionsService");
-        adminActionsService.adminActions(req, resp);
+        LanguageService languageService = (LanguageService) servletContext.getAttribute("languageService");
+        languageService.language(req, resp);
     }
 }

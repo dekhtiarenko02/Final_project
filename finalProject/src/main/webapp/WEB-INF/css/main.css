@@ -14,6 +14,12 @@ html{
     color: antiquewhite;
 }
 
+#languageHeader{
+    position:absolute;
+    top: 19%;
+    right: 2%;
+}
+
 #notHiddenLinks{
     position: absolute;
     display:block;
@@ -232,7 +238,7 @@ html{
 
 .arrange-book{
     position:absolute;
-    height: 32px;
+    height: 37px;
     width: 108px;
     font-size: 15px;
     margin-top: 30px;
@@ -245,7 +251,7 @@ html{
 
 .order-book{
     position:absolute;
-    height: 32px;
+    height: 37px;
     width: 108px;
     font-size: 15px;
     margin-top: 30px;
@@ -270,7 +276,7 @@ html{
 
 .return-book{
     position:absolute;
-    height: 32px;
+    height: 37px;
     width: 108px;
     font-size: 15px;
     margin-top: 30px;
@@ -366,7 +372,7 @@ html{
 
 .editProfileButton{
     position:absolute;
-    height: 36px;
+    height: 40px;
     width: 108px;
     font-size: 16px;
     margin-top: 80px;
@@ -382,7 +388,7 @@ html{
 .librarianActionsButton{
     position:absolute;
     height: 50px;
-    width: 108px;
+    width: 110px;
     font-size: 16px;
     margin-bottom: 650px;
     margin-left: 500px;
@@ -556,10 +562,40 @@ position: fixed;
 }
 
 #bookListTable{
+    position:absolute;
     display:none;
 }
 
 .subscriptionOfUserButton:hover{
+    transition: 0.0s;
+    background: #fff;
+    color: #804621;
+}
+
+#mainPageSubmit{
+    position:absolute;
+    height: 40px;
+    width: 100px;
+    font-size: 16px;
+    margin-top: 115px;
+    background-color:#804621;
+    margin-left: -50px;
+    color:black;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+.permissionText{
+    position:absolute;
+    font-size:18px;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    margin-left: 80px;
+    margin-top: 50px;
+}
+
+#mainPageSubmit:hover{
     transition: 0.0s;
     background: #fff;
     color: #804621;
@@ -808,6 +844,17 @@ position: fixed;
     background-color: #4e4b46;
 }
 
+.permissionBlock{
+    width: 20%;
+    height: 30%;
+    background-color: #F5DCCA;
+    border-radius: 2%;
+    margin-left: 39%;
+    margin-top: 10%;
+    text-align: center;
+    position: absolute;
+}
+
 #deleteSubmitForm{
     width: 20%;
     height: 30%;
@@ -986,7 +1033,11 @@ th:first-child, td:first-child {
     left: 70px;
 }
 
-.logo:hover{
+.usaFlag:hover{
+    filter: brightness(0.9);
+}
+
+.rusFlag:hover{
     filter: brightness(0.9);
 }
 

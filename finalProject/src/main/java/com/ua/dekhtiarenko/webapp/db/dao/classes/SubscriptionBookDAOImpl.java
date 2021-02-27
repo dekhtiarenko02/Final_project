@@ -20,6 +20,11 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
 
+    /**
+     * Insert subscription book.
+     *
+     * @param subscriptionId
+     */
     @Override
     public void insertSubscriptionBook(int bookId, int subscriptionId) {
         Date date = new Date(System.currentTimeMillis());
@@ -37,6 +42,11 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         }
     }
 
+    /**
+     * Delete subscription book.
+     *
+     * @param subscriptionId
+     */
     @Override
     public void deleteSubscriptionBook(int bookId, int subscriptionId) {
         try {
@@ -52,6 +62,11 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         }
     }
 
+    /**
+     * Return list of subscription book.
+     *
+     * @return list
+     */
     @Override
     public List<SubscriptionBook> getListSubscriptionBook() {
         List<SubscriptionBook> list = new ArrayList<>();
@@ -70,6 +85,12 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         return list;
     }
 
+    /**
+     * Return list of subscription book by user id.
+     *
+     * @param userId
+     * @return list
+     */
     @Override
     public List<SubscriptionBook> getListSubscriptionBook(int userId) {
         List<SubscriptionBook> list = new ArrayList<>();
@@ -89,7 +110,12 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         return list;
     }
 
-
+    /**
+     * Returns book by resultSet.
+     *
+     * @param resultSet
+     * @return subscription book.
+     */
     @Override
     public SubscriptionBook readingResultSet(ResultSet resultSet) {
         SubscriptionBook subscription = new SubscriptionBook();
@@ -104,6 +130,9 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         return subscription;
     }
 
+    /**
+     * Closes resources.
+     */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
         try {

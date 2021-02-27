@@ -24,14 +24,20 @@ public class BookDAOImpl implements BookDAO {
     private ResultSet rs = null;
 
 
+    /**
+     * Returns List of books by name of book or author.
+     *
+     * @param bookOrAuthor
+     * @return List of books.
+     */
     @Override
     public List<Book> getBooksByNameOrAuthor(String bookOrAuthor) {
         List<Book> book = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.SELECT_BOOK_FROM_BOOK_BY_NAME_OR_AUTHOR);
-            preparedStatement.setString(1, "%"+bookOrAuthor+"%");
-            preparedStatement.setString(2, "%"+bookOrAuthor+"%");
+            preparedStatement.setString(1, "%" + bookOrAuthor + "%");
+            preparedStatement.setString(2, "%" + bookOrAuthor + "%");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 book.add(readingResultSet(rs));
@@ -44,6 +50,11 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    /**
+     * Insert book.
+     *
+     * @param book
+     */
     @Override
     public void insertBook(Book book) {
         try {
@@ -69,6 +80,13 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Returns book by resultSet.
+     *
+     * @param resultSet
+     * @return book.
+     */
+
     @Override
     public Book readingResultSet(ResultSet resultSet) {
         Book book = new Book();
@@ -91,6 +109,11 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    /**
+     * Update book.
+     *
+     * @param book_id
+     */
     @Override
     public void updateBook(Book book, int book_id) {
         try {
@@ -114,6 +137,12 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Return list of book by genre.
+     *
+     * @param genre
+     * @return bookList.
+     */
     @Override
     public List<Book> getListBookByGenre(String genre) {
         List<Book> bookList = new ArrayList<>();
@@ -133,6 +162,12 @@ public class BookDAOImpl implements BookDAO {
         return bookList;
     }
 
+    /**
+     * Return book id by name of book.
+     *
+     * @param nameOfBook
+     * @return id
+     */
     @Override
     public int getBookIdByName(String nameOfBook) {
         int id = 0;
@@ -152,6 +187,12 @@ public class BookDAOImpl implements BookDAO {
         return id;
     }
 
+    /**
+     * Return book by name.
+     *
+     * @param nameOfBook
+     * @return book.
+     */
     @Override
     public Book getBookByName(String nameOfBook) {
         Book book = new Book();
@@ -171,6 +212,11 @@ public class BookDAOImpl implements BookDAO {
         return book;
     }
 
+    /**
+     * Reduce book availability by id.
+     *
+     * @param id_book
+     */
     @Override
     public void reduceBookAvailabilityById(int id_book) {
         try {
@@ -185,6 +231,11 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Increase book availability by id.
+     *
+     * @param id_book
+     */
     @Override
     public void increaseBookAvailabilityById(int id_book) {
         try {
@@ -199,6 +250,11 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Delete book by id.
+     *
+     * @param book_id
+     */
     @Override
     public void deleteBook(int book_id) {
         try {
@@ -213,6 +269,11 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Return list of book.
+     *
+     * @return bookList
+     */
     @Override
     public List<Book> getListBook() {
         List<Book> bookList = new ArrayList<>();
@@ -231,6 +292,12 @@ public class BookDAOImpl implements BookDAO {
         return bookList;
     }
 
+    /**
+     * Return availability by book id.
+     *
+     * @param book_id
+     * @return availability
+     */
     @Override
     public int getAvailabilityByBookId(int book_id) {
         int availability = 0;
@@ -250,6 +317,11 @@ public class BookDAOImpl implements BookDAO {
         return availability;
     }
 
+    /**
+     * Update book order by name of book.
+     *
+     * @param nameOfBook
+     */
     @Override
     public void updateBookOrderByNameOfBook(String nameOfBook) {
         try {
@@ -264,6 +336,12 @@ public class BookDAOImpl implements BookDAO {
         }
     }
 
+    /**
+     * Return name of book by id.
+     *
+     * @param bookId
+     * @return Name of book
+     */
     @Override
     public String getNameOfBookById(int bookId) {
         String nameOfBook = "";
@@ -283,6 +361,9 @@ public class BookDAOImpl implements BookDAO {
         return nameOfBook;
     }
 
+    /**
+     * Closes resources.
+     */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
         try {

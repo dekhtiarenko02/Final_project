@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=cp1251" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,27 +12,44 @@
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
+    <fmt:setLocale value="${language}"/>
+    <fmt:setBundle basename="res"/>
      <div class="books_catalog">
                 <a href = "#" class="books_catalog_button">
                     <span class="books_catalog_lines"> </span>
                 </a>
             <%
-                String genreParam = request.getParameter("genre");
-                request.setAttribute("genreVar",genreParam);
-                String idParam = request.getParameter("id");
-                request.setAttribute("idVal", idParam);
+                if(request.getParameter("searchWord") != null){
+                    String searchParam = request.getParameter("searchWord");
+                    request.setAttribute("search", searchParam);
+                }
+                else{
+                    request.setAttribute("idVal", request.getAttribute("searchWord"));
+                }
+                if(request.getParameter("id") != null){
+                    String idParam = request.getParameter("id");
+                    request.setAttribute("idVal", idParam);
+                }
+                else{
+                    request.setAttribute("idVal", request.getAttribute("id"));
+                }
             %>
-                <nav class="books_catalog_nav">
-                <a href="CatalogServlet?genre=Detective&id=${idVal}" class="books_catalog_link">Detective</a>
-                <a href="CatalogServlet?genre=Fantasy&id=${idVal}" class="books_catalog_link">Fantasy</a>
-                <a href="CatalogServlet?genre=Horror&id=${idVal}" class="books_catalog_link">Horror</a>
-                <a href="CatalogServlet?genre=Romance&id=${idVal}" class="books_catalog_link">Romance</a>
-                <a href="CatalogServlet?genre=Psychology&id=${idVal}" class="books_catalog_link">Psychology</a>
-                </nav>
+             <nav class="books_catalog_nav">
+                 <a href="CatalogServlet?genre=Detective&id=${idVal}" class="books_catalog_link"><label><fmt:message key="detective"/></label></a>
+                 <a href="CatalogServlet?genre=Fantasy&id=${idVal}" class="books_catalog_link"><label><fmt:message key="fantasy"/></label></a>
+                 <a href="CatalogServlet?genre=Horror&id=${idVal}" class="books_catalog_link"><label><fmt:message key="horror"/></label></a>
+                 <a href="CatalogServlet?genre=Romance&id=${idVal}" class="books_catalog_link"><label><fmt:message key="romance"/></label></a>
+                 <a href="CatalogServlet?genre=Psychology&id=${idVal}" class="books_catalog_link"><label><fmt:message key="psychology"/></label></a>
+             </nav>
             <div class="books_catalog_overlay"> </div>
      </div>
         <div class = "header">
-        <form action ="SearchServlet" method = "post">
+            <nav id="languageHeader">
+              <a href="LanguageServlet?id=${idVal}&language=en"><img class="usaFlag" src="images/unitedStates.png"></a>
+              <span class="stick"></span>
+              <a href="LanguageServlet?id=${idVal}&language=ru" ><img class="rusFlag" src="images/russia.png"></a>
+            </nav>
+        <form action ="SearchServlet?id=${idVal}" method = "post">
             <div>
                 <input type="text" class="search" name="Search" placeholder="Search">
                 <input class ="search-submit" type="submit" value="Confirm">
@@ -40,19 +58,19 @@
                 <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                     height="64"></a>
             <nav id="notHiddenLinks">
-                <a class = "link" href="login.jsp">Log in</a>
+                <a class = "link" href="login.jsp"><label><fmt:message key="log_in"/></label></a>
                 <span class="stick">|</span>
-                <a class = "link" href="registrationPage.jsp">Sign Up</a>
+                <a class = "link" href="registrationPage.jsp"><label><fmt:message key="sign_up"/></label></a>
             </nav>
             <nav id="hiddenLinks">
-                <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
+                <a class = "link" href="ProfileServlet?id=${idVal}"><label><fmt:message key="profile"/></label></a>
                 <span class="stick">|</span>
-                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}"><label><fmt:message key="log_out"/></label></a>
             </nav>
     </div>
         <div class="catalogBook">
         <c:forEach var="book" items="${bookList}" end="1">
-        <c:if test="${book != null}">
+
              <div class="bookStyle">
                 <div class="titleBook">
                     <p class="indent">Genre: ${book.genre}</p>
@@ -70,7 +88,6 @@
             </div>
             <div class="plotBook">
                 <p>${book.plot}</p>
-                </c:if>
                 </c:forEach>
             </div>
             <form action="ArrangeServlet?id=${idVal}" method="post">
@@ -80,7 +97,7 @@
         </div>
         <div class="pagination">
             <c:forEach var="pages" items="${pageList}">
-                <a href="SearchServlet?id=${idVal}&page=${pages}" class="active">${pages}</a>
+                <a href="SearchServlet?id=${idVal}&page=${pages}&search=${searchWord}">${pages}</a>
             </c:forEach>
         </div>
     </div>

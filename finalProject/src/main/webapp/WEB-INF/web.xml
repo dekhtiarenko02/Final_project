@@ -143,4 +143,38 @@
         <servlet-name>MainPageServlet</servlet-name>
         <url-pattern>/MainPageServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LanguageServlet</servlet-name>
+        <servlet-class>com.ua.dekhtiarenko.webapp.controllers.LanguageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LanguageServlet</servlet-name>
+        <url-pattern>/LanguageServlet</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>AdminActionsFilter</filter-name>
+        <filter-class>com.ua.dekhtiarenko.webapp.filter.AdminActionsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminActionsFilter</filter-name>
+        <servlet-name>AdminActionsServlet</servlet-name>
+        <url-pattern>/AdminActionsServlet?id=?</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>LibrarianActionFilter</filter-name>
+        <filter-class>com.ua.dekhtiarenko.webapp.filter.LibrarianActionFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LibrarianActionFilter</filter-name>
+        <servlet-name>LibrarianActionsServlet</servlet-name>
+        <url-pattern>/LibrarianActionsServlet?id=?</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>CharSetFilter</filter-name>
+        <filter-class>com.ua.dekhtiarenko.webapp.filter.CharSetFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharSetFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

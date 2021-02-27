@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=cp1251" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,48 +12,55 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-<%
-if(request.getParameter("id") != null){
-    String idParam = request.getParameter("id");
-    request.setAttribute("idVal", idParam);
-}
-else{
-    request.setAttribute("idVal", request.getAttribute("id"));
-}
-%>
+    <fmt:setLocale value="${language}"/>
+    <fmt:setBundle basename="res"/>
+    <%
+    if(request.getParameter("id") != null){
+        String idParam = request.getParameter("id");
+        request.setAttribute("idVal", idParam);
+    }
+    else{
+        request.setAttribute("idVal", request.getAttribute("id"));
+    }
+    %>
     <div class="books_catalog">
         <a href = "#" class="books_catalog_button">
             <span class="books_catalog_lines"> </span>
         </a>
         <nav class="books_catalog_nav">
-            <a href="CatalogServlet?genre=Detective&id=${idVal}" class="books_catalog_link">Detective</a>
-            <a href="CatalogServlet?genre=Fantasy&id=${idVal}" class="books_catalog_link">Fantasy</a>
-            <a href="CatalogServlet?genre=Horror&id=${idVal}" class="books_catalog_link">Horror</a>
-            <a href="CatalogServlet?genre=Romance&id=${idVal}" class="books_catalog_link">Romance</a>
-            <a href="CatalogServlet?genre=Psychology&id=${idVal}" class="books_catalog_link">Psychology</a>
+            <a href="CatalogServlet?genre=Detective&id=${idVal}" class="books_catalog_link"><label><fmt:message key="detective"/></label></a>
+            <a href="CatalogServlet?genre=Fantasy&id=${idVal}" class="books_catalog_link"><label><fmt:message key="fantasy"/></label></a>
+            <a href="CatalogServlet?genre=Horror&id=${idVal}" class="books_catalog_link"><label><fmt:message key="horror"/></label></a>
+            <a href="CatalogServlet?genre=Romance&id=${idVal}" class="books_catalog_link"><label><fmt:message key="romance"/></label></a>
+            <a href="CatalogServlet?genre=Psychology&id=${idVal}" class="books_catalog_link"><label><fmt:message key="psychology"/></label></a>
         </nav>
         <div class="books_catalog_overlay"> </div>
     </div>
     <div class = "header">
+            <nav id="languageHeader">
+              <a href="LanguageServlet?id=${idVal}&language=en"><img class="usaFlag" src="images/unitedStates.png"></a>
+              <span class="stick"></span>
+              <a href="LanguageServlet?id=${idVal}&language=ru" ><img class="rusFlag" src="images/russia.png"></a>
+            </nav>
             <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"
                height="64">
             </a>
-        <nav id="notHiddenLinks">
-            <a class = "link" href="login.jsp">Log in</a>
-            <span class="stick">|</span>
-            <a class = "link" href="registrationPage.jsp">Sign Up</a>
-        </nav>
-        <nav id="hiddenLinks">
-            <a class = "link" href="ProfileServlet?id=${idVal}">Profile</a>
-            <span class="stick">|</span>
-            <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
-        </nav>
+            <nav id="notHiddenLinks">
+                <a class = "link" href="login.jsp"><label><fmt:message key="log_in"/></label></a>
+                <span class="stick">|</span>
+                <a class = "link" href="registrationPage.jsp"><label><fmt:message key="sign_up"/></label></a>
+            </nav>
+            <nav id="hiddenLinks">
+                <a class = "link" href="ProfileServlet?id=${idVal}"><label><fmt:message key="profile"/></label></a>
+                <span class="stick">|</span>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}"><label><fmt:message key="log_out"/></label></a>
+            </nav>
     </div>
         <div class="librarianActions">
-        <button id="userListButton" class="listOfUsersButton" type="submit">User list</button>
-        <button id="subscriptionButton" class="subscriptionOfUserButton" type="submit">Subscription</button>
-        <button id="subscriptionBookButton" class="subscriptionBookOfUserButton" type="submit">Subscription book</button>
-        <button id="bookListButton" class="bookListButton" type="submit">Book list</button>
+        <button id="userListButton" class="listOfUsersButton" type="submit"><label><fmt:message key="user_list"/></label></button>
+        <button id="subscriptionButton" class="subscriptionOfUserButton" type="submit"><label><fmt:message key="subscription"/></label></button>
+        <button id="subscriptionBookButton" class="subscriptionBookOfUserButton" type="submit"><label><fmt:message key="subscription_book"/></label></button>
+        <button id="bookListButton" class="bookListButton" type="submit"><label><fmt:message key="book_list"/></label></button>
         <div id="tables">
             <table id="tableOfUsers">
                 <tr>

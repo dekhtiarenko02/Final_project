@@ -23,6 +23,11 @@ public class UserDAOImpl implements UserDAO {
     private static PreparedStatement preparedStatement = null;
     private static ResultSet rs = null;
 
+    /**
+     * Insert user.
+     *
+     * @param user
+     */
     @Override
     public void insertUser(User user) {
         try {
@@ -43,7 +48,12 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-
+    /**
+     * Return user by id.
+     *
+     * @param id
+     * @return user.
+     */
     @Override
     public User getUserById(int id) {
         User user = new User();
@@ -70,6 +80,11 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Update user.
+     *
+     * @param user
+     */
     @Override
     public void updateUser(User user) {
         try {
@@ -87,6 +102,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Update user.
+     *
+     * @param user_id
+     */
     @Override
     public void updateUser(User user, int user_id) {
         try {
@@ -106,7 +126,11 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-
+    /**
+     * Return list of user.
+     *
+     * @return userList.
+     */
     @Override
     public List<User> getUserList() {
         List<User> userList = new ArrayList<>();
@@ -125,6 +149,12 @@ public class UserDAOImpl implements UserDAO {
         return userList;
     }
 
+    /**
+     * Returns book by resultSet.
+     *
+     * @param resultSet
+     * @return subscription book.
+     */
     @Override
     public User readingResultSet(ResultSet resultSet) {
         User user = new User();
@@ -143,6 +173,12 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Return user id by email.
+     *
+     * @param email
+     * @return id
+     */
     @Override
     public int getUserIdByEmail(String email) {
         int id = 0;
@@ -162,6 +198,12 @@ public class UserDAOImpl implements UserDAO {
         return id;
     }
 
+    /**
+     * Return true or false auntification.
+     *
+     * @param name
+     * @return status
+     */
     @Override
     public boolean exists(String name, String pass) {
         boolean status = false;
@@ -178,6 +220,9 @@ public class UserDAOImpl implements UserDAO {
         return status;
     }
 
+    /**
+     * Closes resources.
+     */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
         try {

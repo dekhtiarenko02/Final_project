@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=utf-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -8,19 +9,26 @@
         <link href="main.css" rel="stylesheet" type = "text/css">
     </head>
     <body>
+    <fmt:setLocale value="${language}"/>
+    <fmt:setBundle basename="res"/>
         <div class = "header">
+            <nav id="languageHeader">
+              <a href="LanguageServlet?id=${idVal}&language=en"><img class="usaFlag" src="images/unitedStates.png"></a>
+              <span class="stick"></span>
+              <a href="LanguageServlet?id=${idVal}&language=ru" ><img class="rusFlag" src="images/russia.png"></a>
+            </nav>
             <a href="MainPageServlet?id=${idVal}"><img class="logo" src="images/logotype.png" width="64"
                 height="64"></a>
-           <nav id="notHiddenLinks">
-               <a class = "link" href="login.jsp">Log in</a>
-               <span class="stick">|</span>
-               <a class = "link" href="registrationPage.jsp">Sign Up</a>
-           </nav>
-           <nav id="hiddenLinks">
-               <a class = "link" href="ProfileServlet">Profile</a>
-               <span class="stick">|</span>
-               <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}">Log out</a>
-           </nav>
+            <nav id="notHiddenLinks">
+                <a class = "link" href="login.jsp"><label><fmt:message key="log_in"/></label></a>
+                <span class="stick">|</span>
+                <a class = "link" href="registrationPage.jsp"><label><fmt:message key="sign_up"/></label></a>
+            </nav>
+            <nav id="hiddenLinks">
+                <a class = "link" href="ProfileServlet?id=${idVal}"><label><fmt:message key="profile"/></label></a>
+                <span class="stick">|</span>
+                <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}"><label><fmt:message key="log_out"/></label></a>
+            </nav>
       </div>
 <div class="container2">
     <img class="avatar"  src="images/avatarR.png">

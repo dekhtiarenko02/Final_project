@@ -20,7 +20,13 @@ public class DBManager {
 
     }
 
+    /**
+     * Returns a DB connection.
+     *
+     * @return DB connection.
+     */
     public static Connection getConnection() {
+
         properties.setProperty("useUnicode", "true");
         properties.setProperty("characterEncoding", "UTF-8");
         try {

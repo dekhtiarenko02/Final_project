@@ -39,6 +39,7 @@ public class MainPageService {
 
         req.setAttribute("bookListAvailabilityMore", bookListAvailabilityMore);
         req.setAttribute("bookListAvailabilityLess", bookListAvailabilityLess);
+        req.setAttribute("language",req.getAttribute("language"));
         req.getRequestDispatcher("/index.jsp").forward(req, resp);
     }
 }

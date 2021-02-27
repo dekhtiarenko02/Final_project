@@ -17,19 +17,3 @@ window.addEventListener("load",function(){
         localStorage.setItem("notHiddenLinksStyle", document.getElementById("notHiddenLinks").style.display);
     }); // перезаписываем страницу при каждом клике
 });
-
-
-var input = document.querySelectorAll('input')
-  ,value = input.value;
-
-input.addEventListener('input', onInput);
-
-function onInput(e){
-  var newValue = e.target.value;
-  if( newValue.match(/[^a-zA-Zа-яА-Я0-9]/g)) {
-     input.value = value;
-     return;
-  }
-  value = newValue;
-}
-//<input type="text" id="in-txt">

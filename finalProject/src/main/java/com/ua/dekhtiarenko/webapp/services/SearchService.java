@@ -22,45 +22,50 @@ public class SearchService {
 
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
-        String nameOfBook = req.getParameter("Search");
+        String nameOfBook;
+        if (req.getParameter("Search") != null) {
+            nameOfBook = req.getParameter("Search");
+        } else {
+            nameOfBook = req.getParameter("search");
+        }
+
         Validation validation = (Validation) servletContext.getAttribute("validation");
         List<Book> bookList = new ArrayList<>(bookDAOImpl.getBooksByNameOrAuthor(nameOfBook));
         List<Integer> pageList = new ArrayList<>();
 
-        if (bookList.size() % 2 == 0) {
-            for (int i = 0; i < bookList.size() / 2; i++) {
-                pageList.add(i + 1);
-            }
-        } else {
-            for (int i = 0; i < bookList.size() / 2 + 1; i++) {
-                pageList.add(i + 1);
-            }
-        }
-
-        int counter = 0;
-        int index = 0;
-
-        while (true) {
-            if (req.getParameter("page") == null || req.getParameter("page").equals("1")) {
-                break;
-            } else if (req.getParameter("page").equals("2")) {
-                if (counter == 2) {
-                    break;
+        if (validation.isValidText(nameOfBook)) {
+            if (bookList.size() % 2 == 0) {
+                for (int i = 0; i < bookList.size() / 2; i++) {
+                    pageList.add(i + 1);
                 }
-                bookList.remove(index);
-            } else if (req.getParameter("page").equals("3")) {
-                if (counter == 4) {
-                    break;
+            } else {
+                for (int i = 0; i < bookList.size() / 2 + 1; i++) {
+                    pageList.add(i + 1);
                 }
-                bookList.remove(index);
             }
-            counter++;
-        }
 
-        if (validation.isValidText(nameOfBook)){
-            req.setAttribute("bookList",bookList);
-        }
+            int counter = 0;
+            int index = 0;
 
+            while (true) {
+                if (req.getParameter("page") == null || req.getParameter("page").equals("1")) {
+                    break;
+                } else if (req.getParameter("page").equals("2")) {
+                    if (counter == 2) {
+                        break;
+                    }
+                    bookList.remove(index);
+                } else if (req.getParameter("page").equals("3")) {
+                    if (counter == 4) {
+                        break;
+                    }
+                    bookList.remove(index);
+                }
+                counter++;
+            }
+        }
+        req.setAttribute("searchWord", nameOfBook);
+        req.setAttribute("bookList", bookList);
         req.setAttribute("pageList", pageList);
         req.getRequestDispatcher("/searchBook.jsp").forward(req, resp);
     }
