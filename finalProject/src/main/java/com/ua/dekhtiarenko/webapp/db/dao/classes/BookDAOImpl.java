@@ -163,6 +163,31 @@ public class BookDAOImpl implements BookDAO {
     }
 
     /**
+     * Return sorted list of book by genre.
+     *
+     * @param genre
+     * @return bookList.
+     */
+    @Override
+    public List<Book> getListBookByGenreSorted(String genre, String sortBy) {
+        List<Book> bookList = new ArrayList<>();
+        try {
+            connection = DBManager.getConnection();
+            preparedStatement = connection.prepareStatement(Request.SELECT_FROM_BOOK_BY_GENRE + " ORDER BY " + sortBy);
+            preparedStatement.setString(1, genre);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                bookList.add(readingResultSet(rs));
+            }
+        } catch (SQLException sqlException) {
+            Logger.getLogger(sqlException.getMessage());
+        } finally {
+            closing(connection, preparedStatement, rs);
+        }
+        return bookList;
+    }
+
+    /**
      * Return book id by name of book.
      *
      * @param nameOfBook

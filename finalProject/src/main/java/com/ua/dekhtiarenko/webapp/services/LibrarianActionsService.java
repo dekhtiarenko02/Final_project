@@ -39,6 +39,6 @@ public class LibrarianActionsService {
         req.setAttribute("userList", userList);
         req.setAttribute("subscriptionList", subscriptionList);
         req.setAttribute("subscriptionBookList", subscriptionBookList);
-        req.getRequestDispatcher("/librarianActions.jsp").forward(req,resp);
+        req.getRequestDispatcher("/librarianActions.jsp").forward(req, resp);
     }
 }

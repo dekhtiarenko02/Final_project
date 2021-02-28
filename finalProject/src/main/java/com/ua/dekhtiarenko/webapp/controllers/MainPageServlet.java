@@ -27,8 +27,8 @@ public class MainPageServlet extends HttpServlet {
         resp.setContentType(Request.TEXT_HTML);
 
         ServletContext servletContext = req.getServletContext();
-        MainPageService mainPageService = (MainPageService) servletContext.getAttribute("mainPageService");
 
+        MainPageService mainPageService = (MainPageService) servletContext.getAttribute("mainPageService");
         mainPageService.mainPage(req, resp);
     }
 }

@@ -10,6 +10,8 @@ public class Request {
     public static final String CP_1251 = "cp1251";
     public static final String TEXT_HTML = "text/html";
 
+    public static final String PAGE_ERROR_PERMISSION = "/error.jsp";
+
     public static final String INSERT_INTO_USER = "INSERT INTO user(email, name, surname, librarian, admin, blocked, password) VALUES (?, ?, ?, ?, ?, ?, ?);";
     public static final String VALIDATION_OF_USER = "SELECT * FROM user WHERE email = ? AND password = ?";
     public static final String SELECT_FROM_USER = "SELECT* FROM user";
@@ -26,7 +28,6 @@ public class Request {
     public static final String SELECT_BOOK_NAME_FROM_BOOK_BY_ID = "SELECT nameOfBook FROM book WHERE id_book = ?";
     public static final String SELECT_BOOK_FROM_BOOK_BY_NAME = "SELECT* FROM book WHERE nameOfBook = ?";
     public static final String SELECT_BOOK_FROM_BOOK_BY_NAME_OR_AUTHOR = "SELECT* FROM book WHERE nameOfBook LIKE ? OR author LIKE ?;";
-    public static final String SELECT_BOOK_FROM_BOOK_BY_AUTHOR = "SELECT* FROM book WHERE author LIKE ?";
     public static final String UPDATE_BOOK_SET_AVAILABILITY_PLUS = "UPDATE book SET availability = availability + 1 WHERE id_book = ?";
     public static final String UPDATE_BOOK_SET_AVAILABILITY_MINUS = "UPDATE book SET availability = availability - 1 WHERE id_book = ?";
     public static final String UPDATE_BOOK_SET_ORDER_BY_NAME_OF_BOOK = "UPDATE book SET isOrder = true WHERE nameOfBook = ?";

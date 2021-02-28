@@ -43,8 +43,10 @@ public class RegisterService {
             userDAOImpl.insertUser(user);
             user.setId(userDAOImpl.getUserIdByEmail(user.getEmail()));
             subscriptionDAOImpl.insertSubscription(user);
+            req.getRequestDispatcher("MainPageServlet").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }
 
-        req.getRequestDispatcher("MainPageServlet").forward(req, resp);
     }
 }

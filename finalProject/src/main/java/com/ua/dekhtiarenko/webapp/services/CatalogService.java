@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
@@ -22,7 +23,21 @@ public class CatalogService {
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         String genre = req.getParameter("genre");
+        String sort = req.getParameter("Sort");
         List<Book> bookList = bookDAOImpl.getListBookByGenre(genre);
+
+        if (Objects.equals(sort, "-")) {
+            bookList = bookDAOImpl.getListBookByGenre(genre);
+        } else if (Objects.equals(sort, "Name of book") || Objects.equals(sort, "Названию")) {
+            bookList = bookDAOImpl.getListBookByGenreSorted(genre, "nameOfBook");
+        } else if (Objects.equals(sort, "Author") || Objects.equals(sort, "Автору")) {
+            bookList = bookDAOImpl.getListBookByGenreSorted(genre, "author");
+        } else if (Objects.equals(sort, "Year of issue") || Objects.equals(sort, "Году выпуска")) {
+            bookList = bookDAOImpl.getListBookByGenreSorted(genre, "year");
+        } else if (Objects.equals(sort, "Publisher") || Objects.equals(sort, "Изданию")) {
+            bookList = bookDAOImpl.getListBookByGenreSorted(genre, "publisher");
+        }
+
         List<Integer> pageList = new ArrayList<>();
 
         if (bookList.size() % 2 == 0) {

@@ -5,6 +5,7 @@ import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -21,7 +21,7 @@ public class OrderService {
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         bookDAOImpl.updateBookOrderByNameOfBook(bookIdReturn);
 
-        req.setAttribute("id",req.getParameter("id"));
+        req.setAttribute("id", req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);
     }
 }

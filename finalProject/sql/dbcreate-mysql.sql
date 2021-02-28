@@ -24,7 +24,7 @@ CREATE TABLE book (
     availability INT NOT NULL,
 	numberOfPages INT NOT NULL,
     language VARCHAR(45) NOT NULL,
-    plot VARCHAR(600),
+    plot VARCHAR(435),
     isOrder BOOLEAN NOT NULL,
 	PRIMARY KEY(id_book)
 );
@@ -51,8 +51,6 @@ DROP TABLE subscriptionBook;
 DROP TABLE subscription;
 DROP TABLE book;
 DROP TABLE user;
-
-SELECT* FROM book WHERE nameOfBook LIKE "%The%";
 
 SELECT* FROM user;
 SELECT* FROM book;
@@ -90,7 +88,7 @@ In December 2002, Mikael Blomkvist.", false);
  INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Fantasy", "https://images.penguinrandomhouse.com/cover/9780141321073",
  "Lewis Carroll", "Alice's Adventures in Wonderland","Macmillan", 1865, 4, 141, "English", "Alice, bored on the river bank with her sister, sees a hurrying White Rabbit holding a pocket watch in its paw.
  She follows him down the rabbit hole, falls into it and finds herself in a hall with many locked doors. There she finds the key to a small 15-inch door, behind which is the garden that the girl wants to get into;
- however, the door is too small for her. Alice discovers various objects that increase and decrease her height.", false);
+ however, the door is too small for her.", false);
 
 
 
@@ -101,7 +99,7 @@ In December 2002, Mikael Blomkvist.", false);
 INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Horror", "https://www.wkar.org/sites/wkar/files/styles/medium/public/dracula_book_cover.jpg",
  "Bram Stoker", "Dracula","UK", 1897, 2, 418, "English", "Jonathan Harker, a newly qualified English solicitor, visits Count Dracula at his castle in the Carpathian Mountains to help the Count purchase a house near London. Ignoring the Count's warning,
  Harker wanders the castle. Soon after, Dracula leaves the castle, abandoning Harker to the women; Harker escapes with his life and ends up delirious in a Budapest hospital.
- Dracula takes a ship for England, with boxes of earth from his castle", false);
+ Dracula takes a ship for England, with boxes from castle.", false);
 
  INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Horror", "https://i.pinimg.com/originals/65/bc/69/65bc69a7bbc7f0e9690599d2c28041b9.jpg",
  "Robert Bloch", "Psycho","Simon & Schuster", 1959, 5, 185, "English", "Norman Bates, a middle-aged bachelor, is dominated by his mother, a mean-tempered, puritanical old woman who forbids him to have a life outside of her.
@@ -111,9 +109,33 @@ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availabili
 
 
  INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Romance", "https://m.media-amazon.com/images/I/51tiK-eB3JL.jpg",
- "Jane Austen", "Pride and Prejudice","Whitehall", 1813, 4, 185, "English", "Norman Bates, a middle-aged bachelor, is dominated by his mother, a mean-tempered, puritanical old woman who forbids him to have a life outside of her.
- They run a small motel together in the town of Fairvale, but business has floundered since the state relocated the highway. In the middle of a heated argument between them, a customer arrives,
- a young woman named Mary Crane.", false);
+ "Jane Austen", "Pride and Prejudice","Whitehall", 1813, 4, 185, "English", "The novel is set in rural England in the early 19th century. Mrs. Bennet attempts to persuade Mr. Bennet to visit Mr. Bingley,
+ a rich bachelor recently arrived in the neighbourhood. After some verbal sparring with her husband, Mrs. Bennet believes he will not call on Mr. Bingley.
+ Shortly afterwards, he visits Netherfield, Mr. Bingley's rented residence, much to Mrs. Bennet's delight..", false);
+
+ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Romance", "https://m.media-amazon.com/images/I/41fcfrag9fL.jpg",
+ "Charlotte Brontë", "Jane Eyre","Smith", 1847, 3, 448, "English", "The novel is a first-person narrative from the perspective of the title character.
+ The novel's setting is somewhere in the north of England, late in the reign of George III (1760–1820). It goes through five distinct stages: Jane's childhood at Gateshead Hall,
+ where she is emotionally and physically abused by her aunt and cousins.", false);
+
+ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Romance", "https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/The_Notebook_Cover.jpg/220px-The_Notebook_Cover.jpg",
+ "Nicholas Sparks", "The Notebook","Warner Books", 1996, 6, 214, "English", "The Notebook is a 1996 romantic novel by American novelist Nicholas Sparks.
+ The novel was later adapted into a popular film of the same name, in 2004.", false);
+
+
+
+ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Psychology", "https://upload.wikimedia.org/wikipedia/en/6/68/Mistakes_were_made_cover_image.jpg",
+ "Carol Tavris", "Mistakes Were Made","	Harcourt", 2007, 5, 298, "English", "Mistakes Were Made (But Not by Me) is a non-fiction book by social psychologists Carol Tavris and Elliot Aronson, first published in 2007. It deals with cognitive dissonance,
+ confirmation bias and other cognitive biases, using these psychological theories to illustrate how the perpetrators (and victims) of hurtful acts justify and rationalize their behavior.", false);
+
+ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Psychology", "https://upload.wikimedia.org/wikipedia/en/thumb/b/b0/GamesPeoplePlay.jpg/220px-GamesPeoplePlay.jpg",
+ "Eric Berne", "Games People","	Grove Press", 1964, 3, 216, "English", "Games People Play: The Psychology of Human Relationships is a bestselling 1964 book by psychiatrist Eric Berne.
+ Since its publication it has sold more than five million copies. The book describes both functional and dysfunctional social interactions..", false);
+
+ INSERT INTO book (genre, urlImg, author, nameOfBook, publisher, year, availability, numberOfPages, language, plot, isOrder) VALUES ("Psychology", "https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Thinking%2C_Fast_and_Slow.jpg/220px-Thinking%2C_Fast_and_Slow.jpg",
+ "Daniel Kahneman", "Thinking, Fast and Slow","	Farrar", 2011, 4, 499, "English", " Thinking, Fast and Slow is a best-selling book published in 2011 by Nobel Memorial Prize in Economic Sciences laureate Daniel Kahneman.
+ It was the 2012 winner of the National Academies Communication Award for best creative work that helps the public understanding of topics in behavioral science,
+ engineering and medicine. The book summarizes research that Kahneman conducted over decades.", false);
 
 
 INSERT INTO user(email, name, surname, Librarian, Admin, blocked, password) VALUES ("dekhtyarenko02@gmail.com", "Daniil", "Dekhtiarenko", false, true, false, "64Ohelos");

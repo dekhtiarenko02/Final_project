@@ -92,6 +92,7 @@
                      </tr>
                      </c:forEach>
               </table>
+
             <table id="bookListTable">
                 <tr>
                     <th>Id</th>
@@ -120,6 +121,7 @@
                 </tr>
                 </c:forEach>
                 </table>
+
         </div>
         <div id="changeUserContainer">
         <form action="changeUser.jsp?id=${idVal}" method="post">

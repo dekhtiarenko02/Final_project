@@ -17,6 +17,8 @@ public interface BookDAO {
 
     List<Book> getListBookByGenre(String genre);
 
+    List<Book> getListBookByGenreSorted(String genre, String nameOfBook);
+
     List<Book> getListBook();
 
     List<Book> getBooksByNameOrAuthor(String bookOrAuthor);

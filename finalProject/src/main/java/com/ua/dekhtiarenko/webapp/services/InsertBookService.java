@@ -25,14 +25,16 @@ public class InsertBookService {
         Book book = new Book();
 
         String genre = req.getParameter("Genre");
+        String urlImg = req.getParameter("UrlImg");
         String author = req.getParameter("Author");
         String nameOfBook = req.getParameter("NameOfBook");
         String publisher = req.getParameter("Publisher");
         String language = req.getParameter("Language");
+        String plot = req.getParameter("Plot");
 
         if (validation.isValidText(genre) && validation.isValidAuthorOrPublisher(author) &&
                 validation.isValidText(nameOfBook) && validation.isValidAuthorOrPublisher(publisher) &&
-                validation.isValidText(language)
+                validation.isValidText(language) && validation.isValidUrlImg(urlImg) && plot.length() < 450
         ) {
             book.setGenre(req.getParameter("Genre"));
             book.setUrlImg(req.getParameter("UrlImg"));

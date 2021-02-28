@@ -1,6 +1,6 @@
 package com.ua.dekhtiarenko.webapp.filter;
 
-import com.ua.dekhtiarenko.webapp.Path;
+import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 
@@ -14,15 +14,15 @@ import java.io.IOException;
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 public class LibrarianActionFilter implements Filter {
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest req = (HttpServletRequest)servletRequest;
-        HttpServletResponse resp = (HttpServletResponse)servletResponse;
+        HttpServletRequest req = (HttpServletRequest) servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
         ServletContext servletContext = req.getServletContext();
         UserDAO userDAO = (UserDAO) servletContext.getAttribute("userDAO");
@@ -30,16 +30,15 @@ public class LibrarianActionFilter implements Filter {
         int userId = Integer.parseInt(servletRequest.getParameter("id"));
         User user = userDAO.getUserById(userId);
 
-        if(user.getLibrarian()) {
+        if (user.getLibrarian()) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            req.getRequestDispatcher(Path.PAGE_ERROR_PERMISSION)
+            req.getRequestDispatcher(Request.PAGE_ERROR_PERMISSION)
                     .forward(req, resp);
         }
     }
 
     @Override
     public void destroy() {
-
     }
 }

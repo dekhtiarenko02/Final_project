@@ -21,7 +21,6 @@ public class ContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
-
         BookDAOImpl bookDAOImpl = new BookDAOImpl();
         SubscriptionBookDAOImpl subscriptionBookDAOImpl = new SubscriptionBookDAOImpl();
         SubscriptionDAOImpl subscriptionDAOImpl = new SubscriptionDAOImpl();
@@ -47,7 +46,6 @@ public class ContextListener implements ServletContextListener {
         MainPageService mainPageService = new MainPageService();
         LanguageService languageService = new LanguageService();
 
-
         servletContext.setAttribute("changeUserService", changeUserService);
         servletContext.setAttribute("deleteBookService", deleteBookService);
         servletContext.setAttribute("adminActionsService", adminActionsService);
@@ -72,7 +70,6 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("subscriptionBookDAO", subscriptionBookDAOImpl);
         servletContext.setAttribute("subscriptionDAO", subscriptionDAOImpl);
         servletContext.setAttribute("userDAO", userDAOImpl);
-
     }
 
     @Override

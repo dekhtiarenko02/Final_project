@@ -27,8 +27,8 @@ public class DeleteBookServlet extends HttpServlet {
         resp.setContentType(Request.TEXT_HTML);
 
         ServletContext servletContext = req.getServletContext();
-        DeleteBookService deleteBookService = (DeleteBookService) servletContext.getAttribute("deleteBookService");
 
+        DeleteBookService deleteBookService = (DeleteBookService) servletContext.getAttribute("deleteBookService");
         deleteBookService.deleteBook(req, resp);
     }
 }

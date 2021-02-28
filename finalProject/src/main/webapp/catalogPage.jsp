@@ -58,6 +58,18 @@
                 <a class = "link changeOnClick" href="MainPageServlet?id=${idVal}"><label><fmt:message key="log_out"/></label></a>
             </nav>
     </div>
+    <form action="CatalogServlet?genre=${genre}&id=${idVal}" method="post">
+    <p class="sortedByText"><label><fmt:message key="sortBy"/></label>:
+            <select class="selectSort" name="Sort">
+              <option class="sortText"><label>-</option>
+              <option class="sortText"><fmt:message key="nameOfBook"/></label></option>
+              <option class="sortText"><label><fmt:message key="author"/></label></option>
+              <option class="sortText"><label><fmt:message key="year"/></label></option>
+              <option class="sortText"><label><fmt:message key="publisher"/></label></option>
+            </select>
+    </p>
+    <button class="confirmSort" type="submit"><label><fmt:message key="save"/></label></button>
+    </form>
         <div class="catalogBook">
              <c:forEach var="book" items="${bookList}" end="1">
              <div class="bookStyle">

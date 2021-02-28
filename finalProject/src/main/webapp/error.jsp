@@ -14,6 +14,7 @@
     <fmt:setLocale value="${language}"/>
     <fmt:setBundle basename="res"/>
     <%
+        String error = request.getParameter("error");
         if(request.getParameter("id") != null){
             String idParam = request.getParameter("id");
             request.setAttribute("idVal", idParam);
@@ -63,7 +64,7 @@
         </div>
         <div class="permissionBlock">
              <form action="MainPageServlet?id=${idVal}" method="post">
-                   <p class="permissionText"><label><fmt:message key="permission"/></label></p>
+                   <p class="permissionText"><label><fmt:message key="error"/></label></p>
                    <button id="mainPageSubmit" type="submit"><label><fmt:message key="mainPage"/></label></button>
              </form>
         </div>

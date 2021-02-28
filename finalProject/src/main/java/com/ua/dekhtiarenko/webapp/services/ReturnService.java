@@ -43,14 +43,14 @@ public class ReturnService {
                     break;
                 }
             }
-            if(userHaveBook){
+            if (userHaveBook) {
                 subscriptionBookDAOImpl.deleteSubscriptionBook(bookIdReturn, subscriptionId);
                 bookDAOImpl.increaseBookAvailabilityById(bookIdReturn);
             }
         }
 
-        req.setAttribute("bookAvailability",bookAvailability);
-        req.setAttribute("id",req.getParameter("id"));
+        req.setAttribute("bookAvailability", bookAvailability);
+        req.setAttribute("id", req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);
     }
 }

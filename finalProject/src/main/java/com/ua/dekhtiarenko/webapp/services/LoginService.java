@@ -28,6 +28,8 @@ public class LoginService {
                 && validation.isValidEmail(email) && validation.isValidPassword(password)) {
             req.setAttribute("id", userDAOImpl.getUserIdByEmail(email));
             req.getRequestDispatcher("MainPageServlet").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }
     }
 }

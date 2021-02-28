@@ -28,6 +28,6 @@ public class AdminActionsService {
 
         req.setAttribute("bookList", bookList);
         req.setAttribute("userList", userList);
-        req.getRequestDispatcher("/adminActions.jsp").forward(req,resp);
+        req.getRequestDispatcher("/adminActions.jsp").forward(req, resp);
     }
 }
