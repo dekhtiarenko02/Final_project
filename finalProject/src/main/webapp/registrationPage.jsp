@@ -35,22 +35,25 @@
                 <form action ="RegisterServlet" method = "post">
                       <div class="dws-input">
                           <img class="reg_images" src="images/email.png">
-                          <input type = "email" name = "Email" placeholder="Your Email">
+                          <fmt:message key="email" var="email_var"/>
+                          <input type = "email" name = "Email" placeholder="${email_var}">
                       </div>
 
                       <div class="dws-input">
                           <img class="reg_images" src="images/name.png">
-                          <input type = "text" name = "Name" placeholder="Your Name">
+                          <fmt:message key="name" var="name_var"/>
+                          <input type = "text" name = "Name" placeholder="${name_var}">
                       </div>
 
                       <div class="dws-input">
                           <img class="reg_images" src="images/surname.png">
-                        <input type = "text" name = "Surname" placeholder="Your Surname">
+                          <fmt:message key="surname" var="surname_var"/>
+                        <input type = "text" name = "Surname" placeholder="${surname_var}">
                       </div>
                       <div class="dws-input">
                            <img class="reg_images" src="images/password.png">
                           <input type="password" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$"
-                         placeholder="Your Password(Min 6 Chars)"
+                         placeholder="Upp., Low. Case., Min 6 Chars,Numb."
                          name="Password">
                       </div>
                       <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>

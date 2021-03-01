@@ -60,37 +60,47 @@
 
         <form action="InsertBookServlet?id=${idVal}" method="post">
             <div id="insertContainer">
-                 <div class="dws-input-insert">
-                     <input class="input-insert" type = "text" name="Genre" placeholder="Genre">
-                 </div>
-                 <div class="dws-input-insert">
-                     <input class="input-insert" type = "text" name="UrlImg" placeholder="Url Img">
-                 </div>
-                 <div class="dws-input-insert">
-                     <input class="input-insert" type = "text" name="Author" placeholder="Author">
-                 </div>
-                 <div class="dws-input-insert">
-                   <input class="input-insert" type = "text" name="NameOfBook" placeholder="Name Of Book">
-                 </div>
-                 <div class="dws-input-insert">
-                   <input class="input-insert" type = "text" name="Publisher" placeholder="Publisher">
-                 </div>
-                 <div class="dws-input-insert">
-                   <input class="input-insert" type = "text" name="year" placeholder="Year">
-                 </div>
-                 <div class="dws-input-insert">
-                    <input class="input-insert" type = "text" name="availability" placeholder="Availability">
-                 </div>
-                 <div class="dws-input-insert">
-                    <input class="input-insert" type = "text" name="numberOfPages" placeholder="Number Of Pages">
-                 </div>
-                 <div class="dws-input-insert">
-                    <input class="input-insert" type = "text" name="Language" placeholder="Language">
-                 </div>
-                 <div class="dws-input-insert">
-                    <input class="input-insert" type = "text" name="Plot" placeholder="Plot">
-                 </div>
-                     <input class ="dws-submit" type="submit" value = "Confirm">
+            <div class="dws-input-insert">
+            <fmt:message key="genre" var="genre_var"/>
+                <input class="input-insert" type = "text" name="Genre" placeholder="${genre_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="urlImg" var="urlImg_var"/>
+                <input class="input-insert" type = "text" name="UrlImg" placeholder="${urlImg_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="authorA" var="author_var"/>
+              <input class="input-insert" type = "text" name="Author" placeholder="${author_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="nameOfBookN" var="nameOfBook_var"/>
+              <input class="input-insert" type = "text" name="NameOfBook" placeholder="${nameOfBook_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="publisherP" var="publisher_var"/>
+              <input class="input-insert" type = "text" name="Publisher" placeholder="${publisher_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="yearY" var="year_var"/>
+              <input class="input-insert" type = "text" name="Year" placeholder="${year_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="availability" var="availability_var"/>
+              <input class="input-insert" type = "text" name="Availability" placeholder="${availability_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="numberOfPages" var="numberOfPages_var"/>
+              <input class="input-insert" type = "text" name="NumberOfPages" placeholder="${numberOfPages_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="language" var="language_var"/>
+              <input class="input-insert" type = "text" name="Language" placeholder="${language_var}">
+            </div>
+            <div class="dws-input-insert">
+            <fmt:message key="plot" var="plot_var"/>
+                  <input class="input-insert" type = "text" name="Plot" placeholder="${plot_var}">
+            </div>
+                  <input class ="dws-submit" type="submit" value = "Confirm">
             </div>
             </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

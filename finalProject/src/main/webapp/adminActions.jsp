@@ -126,28 +126,31 @@
         <div id="changeUserContainer">
         <form action="changeUser.jsp?id=${idVal}" method="post">
             <img class="avatar"  src="images/avatarR.png">
+            <fmt:message key="user_id" var="user_id_var"/>
                    <div class="dws-input">
-                       <input type = "text" name="user_id" placeholder="Enter User Id">
+                       <input type = "text" name="user_id" placeholder="${user_id_var}">
                    </div>
-            <input class ="dws-submit" type="submit" value="Confirm">
+            <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </form>
         </div>
         <div id="changeBookContainer">
         <form action="changeBook.jsp?id=${idVal}" method="post">
             <img class="avatar"  src="images/avatarR.png">
+            <fmt:message key="book_id" var="book_id_var"/>
                    <div class="dws-input">
-                       <input type = "text" name="book_id" placeholder="Enter Book Id">
+                  <input type = "text" name="book_id" placeholder="${book_id_var}">
                    </div>
-            <input class ="dws-submit" type="submit" value="Confirm">
+            <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </form>
         </div>
         <div id="deleteBookContainer">
         <form action="deleteBook.jsp?id=${idVal}" method="post">
             <img class="avatar"  src="images/avatarR.png">
               <div class="dws-input">
-                  <input type = "text" name="book_id" placeholder="Enter Book Id">
+              <fmt:message key="book_id" var="book_id_var"/>
+                  <input type = "text" name="book_id" placeholder="${book_id_var}">
               </div>
-            <input class ="dws-submit" type="submit" value="Confirm">
+            <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </form>
         </div>
         <script>

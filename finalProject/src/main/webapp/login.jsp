@@ -35,13 +35,15 @@
       <form action ="LogInServlet" method = "post">
             <div class="dws-input">
                 <img class="reg_images" src="images/email.png">
-                <input type = "email" name = "Email" placeholder="Your Email">
+                 <fmt:message key="email" var="email_var"/>
+                <input type = "email" name = "Email" placeholder="${email_var}">
             </div>
 
             <div class="dws-input">
                  <img class="reg_images" src="images/password.png">
+                 <fmt:message key="password" var="password_var"/>
                 <input type="password" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$"
-               placeholder="Your Password"
+               placeholder="${password_var}"
                name="Password">
             </div>
             <button class="dws-submit changeOnClick" type="submit"><label><fmt:message key="confirm"/></label></button>

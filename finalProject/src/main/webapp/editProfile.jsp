@@ -62,19 +62,22 @@
             <form action="EditProfileServlet?id=${idVal}" method="post">
                   <div class="dws-input">
                       <img class="reg_images" src="images/name.png">
-                      <input type = "text" name = "Name" placeholder="Your new name">
+                      <fmt:message key="name" var="name_var"/>
+                      <input type = "text" name = "Name" placeholder="${name_var}">
                   </div>
                   <div class="dws-input">
                       <img class="reg_images" src="images/surname.png">
-                    <input type = "text" name = "Surname" placeholder="Your new surname">
+                      <fmt:message key="surname" var="surname_var"/>
+                    <input type = "text" name = "Surname" placeholder="${surname_var}">
                   </div>
                   <div class="dws-input">
                        <img class="reg_images" src="images/password.png">
+                       <fmt:message key="password" var="password_var"/>
                       <input type="password" pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Za-z]).*$"
-                     placeholder="Your new password"
+                     placeholder="${password_var}"
                      name="Password">
                   </div>
-                  <input class ="dws-submit" type="submit" value = "Confirm">
+                  <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </form>
          </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

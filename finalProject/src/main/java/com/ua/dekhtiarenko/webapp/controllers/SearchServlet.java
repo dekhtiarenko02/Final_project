@@ -1,7 +1,6 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
-import com.ua.dekhtiarenko.webapp.services.ReturnService;
 import com.ua.dekhtiarenko.webapp.services.SearchService;
 import org.apache.log4j.Logger;
 
@@ -34,7 +33,7 @@ public class SearchServlet extends HttpServlet {
         ServletContext servletContext = req.getServletContext();
 
         SearchService searchService = (SearchService) servletContext.getAttribute("searchService");
-        searchService.search(req,resp);
+        searchService.search(req, resp);
         logger.info("Finished SearchServlet");
     }
 }

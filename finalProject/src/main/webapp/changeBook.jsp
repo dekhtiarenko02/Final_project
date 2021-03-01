@@ -68,33 +68,42 @@
         <form action="ChangeBookServlet?id=${idVal}&book_id=${idBook}" method="post">
         <div id="changeBook">
                   <div class="dws-input-change">
-                      <input class="input-change" type = "text" name="Genre" placeholder="Genre">
+                  <fmt:message key="genre" var="genre_var"/>
+                      <input class="input-change" type = "text" name="Genre" placeholder="${genre_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="Author" placeholder="Author">
+                  <fmt:message key="authorA" var="author_var"/>
+                    <input class="input-change" type = "text" name="Author" placeholder="${author_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="NameOfBook" placeholder="Name Of Book">
+                  <fmt:message key="nameOfBookN" var="nameOfBook_var"/>
+                    <input class="input-change" type = "text" name="NameOfBook" placeholder="${nameOfBook_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="Publisher" placeholder="Publisher">
+                  <fmt:message key="publisherP" var="publisher_var"/>
+                    <input class="input-change" type = "text" name="Publisher" placeholder="${publisher_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="Year" placeholder="Year">
+                  <fmt:message key="yearY" var="year_var"/>
+                    <input class="input-change" type = "text" name="Year" placeholder="${year_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="Availability" placeholder="Availability">
+                  <fmt:message key="availability" var="availability_var"/>
+                    <input class="input-change" type = "text" name="Availability" placeholder="${availability_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="NumberOfPages" placeholder="Number Of Pages">
+                  <fmt:message key="numberOfPages" var="numberOfPages_var"/>
+                    <input class="input-change" type = "text" name="NumberOfPages" placeholder="${numberOfPages_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="Language" placeholder="Language">
+                  <fmt:message key="language" var="language_var"/>
+                    <input class="input-change" type = "text" name="Language" placeholder="${language_var}">
                   </div>
                   <div class="dws-input-change">
-                    <input class="input-change" type = "text" name="IsOrder" placeholder="IsOrder">
+                  <fmt:message key="isOrder" var="isOrder_var"/>
+                    <input class="input-change" type = "text" name="IsOrder" placeholder="${isOrder_var} (true/false)">
                   </div>
-                  <input class ="dws-submit" type="submit" value = "Confirm">
+                  <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
         </div>
         </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

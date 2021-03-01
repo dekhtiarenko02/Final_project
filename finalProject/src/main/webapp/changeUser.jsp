@@ -69,21 +69,26 @@
         <div id="changeUser">
            <img class="avatar"  src="images/avatarR.png">
                   <div class="dws-input">
-                      <input type = "text" name="Name" placeholder="Name">
+                  <fmt:message key="name" var="name_var"/>
+                      <input type = "text" name="Name" placeholder="${name_var}">
                   </div>
                   <div class="dws-input">
-                    <input type = "text" name="Surname" placeholder="Surname">
+                  <fmt:message key="surname" var="surname_var"/>
+                    <input type = "text" name="Surname" placeholder="${surname_var}">
                   </div>
                   <div class="dws-input">
-                    <input type = "text" name="Librarian" placeholder="Librarian">
+                  <fmt:message key="librarian" var="librarian_var"/>
+                    <input type = "text" name="Librarian" placeholder="${librarian_var} (true/false)">
                   </div>
                   <div class="dws-input">
-                    <input type = "text" name="Admin" placeholder="Admin">
+                  <fmt:message key="admin" var="admin_var"/>
+                    <input type = "text" name="Admin" placeholder="${admin_var} (true/false)">
                   </div>
                   <div class="dws-input">
-                    <input type = "text" name="Blocked" placeholder="Blocked">
+                  <fmt:message key="blocked" var="blocked_var"/>
+                    <input type = "text" name="Blocked" placeholder="${blocked_var} (true/false)">
                   </div>
-                  <input class ="dws-submit" type="submit" value = "Confirm">
+                  <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
         </div>
         </form>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

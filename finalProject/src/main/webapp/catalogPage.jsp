@@ -40,7 +40,8 @@
             </nav>
         <form action ="SearchServlet?id=${idVal}" method = "post">
             <div>
-                <input type="text" class="search" name="Search" placeholder="Search">
+                <fmt:message key="search" var="search_var"/>
+                <input type="text" class="search" name="Search" placeholder="${search_var}">
                 <button class="search-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </div>
         </form>
@@ -73,24 +74,24 @@
              <c:forEach var="book" items="${bookList}" end="1">
              <div class="bookStyle">
                 <div class="titleBook">
-                    <p class="indent">Genre: ${book.getGenre()}</p>
-				    <p class="indent">${book.getAuthor()}.</p>
+                    <p class="indent"><label><fmt:message key="genre"/></label>: ${book.getGenre()}</p>
+				    <p class="indent">${book.getAuthor()}</p>
                 </div>
                 <img align="left" src=${book.getUrlImg()} class="bookIMG">
                 <div class="infoBook">
-                        <span>Author: ${book.getAuthor()}.</span><br>
-                        <span>Name: <strong>${book.getNameOfBook()}.</strong></span><br>
-                        <span>Publisher: </span>${book.getPublisher()}.<br>
-                        <span>Year: </span>${book.getYear()}.<br>
-                        <span>Availability: </span>
+                        <span><label><fmt:message key="authorA"/></label>: ${book.getAuthor()}.</span><br>
+                        <span><label><fmt:message key="nameOfBookN"/></label>: <strong>${book.getNameOfBook()}</strong></span><br>
+                        <span><label><fmt:message key="publisherP"/></label>: </span>${book.getPublisher()}.<br>
+                        <span><label><fmt:message key="yearY"/></label>: </span>${book.getYear()}<br>
+                        <span><label><fmt:message key="availability"/></label>: </span>
                         <c:if test="${book.getAvailability() >= 1}">
-                            ${book.getAvailability()}.<br>
+                            ${book.getAvailability()}<br>
                         </c:if>
                         <c:if test="${book.getAvailability() <= 0}">
-                            Out of stock.<br>
+                            <label><fmt:message key="outOfStock"/></label><br>
                         </c:if>
-                        <span>Number of pages: </span>${book.getNumberOfPages()}.<br>
-					    <span>Language:</span> ${book.getLanguage()}.<br>
+                        <span><label><fmt:message key="numberOfPages"/></label>: </span>${book.getNumberOfPages()}<br>
+					    <span><label><fmt:message key="language"/></label>:</span> ${book.getLanguage()}<br>
             </div>
             <div class="plotBook">
                 <p>${book.getPlot()}</p>

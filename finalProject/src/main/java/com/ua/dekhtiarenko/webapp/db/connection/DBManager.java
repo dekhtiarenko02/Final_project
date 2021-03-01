@@ -3,8 +3,9 @@ package com.ua.dekhtiarenko.webapp.db.connection;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.Properties;
 
 

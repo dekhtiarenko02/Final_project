@@ -33,7 +33,7 @@ public class ReturnServlet extends HttpServlet {
         ServletContext servletContext = req.getServletContext();
 
         ReturnService returnService = (ReturnService) servletContext.getAttribute("returnService");
-        returnService.returnService(req,resp);
+        returnService.returnService(req, resp);
         logger.info("Finished ReturnServlet");
     }
 }

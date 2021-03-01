@@ -1,6 +1,5 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.controllers.CatalogServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import org.apache.log4j.Logger;
@@ -32,7 +31,7 @@ public class CatalogService {
         log.info("Catalog was sorted by " + sort);
         if (Objects.equals(sort, "-")) {
             bookList = bookDAOImpl.getListBookByGenre(genre);
-        } else if (Objects.equals(sort, "Name of book") || Objects.equals(sort, "Названию")) {
+        } else if (Objects.equals(sort, "Title") || Objects.equals(sort, "Названию")) {
             bookList = bookDAOImpl.getListBookByGenreSorted(genre, "nameOfBook");
         } else if (Objects.equals(sort, "Author") || Objects.equals(sort, "Автору")) {
             bookList = bookDAOImpl.getListBookByGenreSorted(genre, "author");

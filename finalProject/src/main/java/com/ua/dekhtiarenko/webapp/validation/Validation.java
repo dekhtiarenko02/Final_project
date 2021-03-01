@@ -1,6 +1,5 @@
 package com.ua.dekhtiarenko.webapp.validation;
 
-import com.ua.dekhtiarenko.webapp.services.SearchService;
 import org.apache.log4j.Logger;
 
 import java.util.regex.Pattern;

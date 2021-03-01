@@ -43,7 +43,8 @@
             </nav>
             <form action ="SearchServlet?id=${idVal}" method = "post">
                 <div>
-                    <input type="text" class="search" name="Search" placeholder="Search">
+                <fmt:message key="search" var="search_var"/>
+                    <input type="text" class="search" name="Search" placeholder="${search_var}">
                     <button class="search-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
                 </div>
             </form>
@@ -64,7 +65,7 @@
            <c:forEach var="book" items="${bookListAvailabilityLess}" end="4">
            <div class="mainBook">
            <img class="mainBooksImg" src="${book.getUrlImg()}">
-           	    <p class="mainInfoBook">${book.nameOfBook}.</p>
+           	    <p class="mainInfoBook">${book.nameOfBook}</p>
            </div>
            </c:forEach>
       </div>
@@ -73,7 +74,7 @@
             <c:forEach var="book" items="${bookListAvailabilityMore}" end="4">
             <div class="mainBook">
             <img class="mainBooksImg" src="${book.getUrlImg()}">
-            	    <p class="mainInfoBook">${book.nameOfBook}.</p>
+            	    <p class="mainInfoBook">${book.nameOfBook}</p>
             </div>
             </c:forEach>
             </div>

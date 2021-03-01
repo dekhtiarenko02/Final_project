@@ -1,6 +1,5 @@
 package com.ua.dekhtiarenko.webapp.services;
 
-import com.ua.dekhtiarenko.webapp.controllers.LanguageServlet;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
