@@ -1,18 +1,23 @@
 package com.ua.dekhtiarenko.webapp.db.connection;
 
+import org.apache.log4j.Logger;
+
 import java.lang.reflect.InvocationTargetException;
 import java.sql.DriverManager;
 import java.sql.*;
 import java.util.Properties;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
  */
 
 public class DBManager {
+
+
     private static Connection conn = null;
     private static final Properties properties = new Properties();
+    private static final Logger logger = Logger.getLogger(DBManager.class);
     private static final String URL = "jdbc:mysql://localhost:3306/web_library?user=root&password=64ohelos&" +
             "serverTimezone=Europe/Kiev&useSSL=false";
 
@@ -26,6 +31,7 @@ public class DBManager {
      * @return DB connection.
      */
     public static Connection getConnection() {
+        logger.info("Start DBManager");
 
         properties.setProperty("useUnicode", "true");
         properties.setProperty("characterEncoding", "UTF-8");
@@ -37,6 +43,7 @@ public class DBManager {
         }
         try {
             conn = DriverManager.getConnection(URL, properties);
+            logger.info("Connection DBManager");
         } catch (SQLException e) {
             Logger.getLogger(e.getMessage());
         }

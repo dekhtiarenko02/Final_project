@@ -2,6 +2,7 @@ package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.services.LoginService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class LogInServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(LogInServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -23,6 +26,8 @@ public class LogInServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start LogInServlet");
+
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
@@ -30,5 +35,6 @@ public class LogInServlet extends HttpServlet {
 
         LoginService loginService = (LoginService) servletContext.getAttribute("loginService");
         loginService.login(req, resp);
+        log.info("Finished LogInServlet");
     }
 }

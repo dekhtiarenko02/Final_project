@@ -1,8 +1,10 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.SearchServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,8 +20,10 @@ import java.util.List;
 
 public class SearchService {
 
-    public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private final Logger logger = Logger.getLogger(SearchService.class);
 
+    public void search(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Start SearchService");
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         String nameOfBook;
@@ -68,5 +72,6 @@ public class SearchService {
         req.setAttribute("bookList", bookList);
         req.setAttribute("pageList", pageList);
         req.getRequestDispatcher("/searchBook.jsp").forward(req, resp);
+        logger.info("Finished SearchService");
     }
 }

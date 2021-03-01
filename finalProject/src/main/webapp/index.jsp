@@ -44,7 +44,7 @@
             <form action ="SearchServlet?id=${idVal}" method = "post">
                 <div>
                     <input type="text" class="search" name="Search" placeholder="Search">
-                    <input class ="search-submit" type="submit" value="Confirm">
+                    <button class="search-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
                 </div>
             </form>
             <nav id="notHiddenLinks">

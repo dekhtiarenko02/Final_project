@@ -2,6 +2,7 @@ package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.services.ReturnService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class ReturnServlet extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(ReturnServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -23,6 +26,7 @@ public class ReturnServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Start ReturnServlet");
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
@@ -30,5 +34,6 @@ public class ReturnServlet extends HttpServlet {
 
         ReturnService returnService = (ReturnService) servletContext.getAttribute("returnService");
         returnService.returnService(req,resp);
+        logger.info("Finished ReturnServlet");
     }
 }

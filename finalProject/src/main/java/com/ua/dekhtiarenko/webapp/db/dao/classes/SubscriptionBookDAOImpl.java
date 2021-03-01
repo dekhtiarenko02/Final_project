@@ -4,11 +4,11 @@ import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.SubscriptionBookDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
 
+    private final Logger logger = Logger.getLogger(SubscriptionBookDAOImpl.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
@@ -27,6 +28,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public void insertSubscriptionBook(int bookId, int subscriptionId) {
+        logger.info("Start insertSubscriptionBook");
         Date date = new Date(System.currentTimeMillis());
         try {
             connection = DBManager.getConnection();
@@ -40,6 +42,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished insertSubscriptionBook");
     }
 
     /**
@@ -49,6 +52,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public void deleteSubscriptionBook(int bookId, int subscriptionId) {
+        logger.info("Start deleteSubscriptionBook");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.DELETE_FROM_SUBSCRIPTION_BOOK);
@@ -60,6 +64,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished deleteSubscriptionBook");
     }
 
     /**
@@ -69,6 +74,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public List<SubscriptionBook> getListSubscriptionBook() {
+        logger.info("Start getListSubscriptionBook");
         List<SubscriptionBook> list = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -82,6 +88,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getListSubscriptionBook");
         return list;
     }
 
@@ -93,6 +100,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public List<SubscriptionBook> getListSubscriptionBook(int userId) {
+        logger.info("Start getListSubscriptionBook");
         List<SubscriptionBook> list = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -107,6 +115,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getListSubscriptionBook");
         return list;
     }
 
@@ -118,6 +127,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public SubscriptionBook readingResultSet(ResultSet resultSet) {
+        logger.info("Start readingResultSet");
         SubscriptionBook subscription = new SubscriptionBook();
         try {
             subscription.setId(resultSet.getInt("id_subscriptionBook"));
@@ -127,6 +137,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished readingResultSet");
         return subscription;
     }
 
@@ -135,6 +146,7 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
      */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
+        logger.info("Start closing");
         try {
             if (rs != null) {
                 rs.close();
@@ -144,5 +156,6 @@ public class SubscriptionBookDAOImpl implements SubscriptionBookDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished closing");
     }
 }

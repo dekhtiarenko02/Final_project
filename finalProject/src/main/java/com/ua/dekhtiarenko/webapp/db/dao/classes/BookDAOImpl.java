@@ -4,6 +4,7 @@ import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.BookDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
@@ -22,6 +23,7 @@ public class BookDAOImpl implements BookDAO {
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
+    private final Logger logger = Logger.getLogger(BookDAOImpl.class);
 
 
     /**
@@ -32,6 +34,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public List<Book> getBooksByNameOrAuthor(String bookOrAuthor) {
+        logger.info("Start getBooksByNameOrAuthor");
         List<Book> book = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -42,11 +45,13 @@ public class BookDAOImpl implements BookDAO {
             while (rs.next()) {
                 book.add(readingResultSet(rs));
             }
+            logger.info("Getting Books By Name Or Author");
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getBooksByNameOrAuthor");
         return book;
     }
 
@@ -57,6 +62,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void insertBook(Book book) {
+        logger.info("Start insertBook");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.INSERT_INTO_BOOK);
@@ -78,6 +84,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished insertBook");
     }
 
     /**
@@ -89,6 +96,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book readingResultSet(ResultSet resultSet) {
+        logger.info("Start readingResultSet");
         Book book = new Book();
         try {
             book.setId(resultSet.getInt("id_book"));
@@ -106,6 +114,7 @@ public class BookDAOImpl implements BookDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished readingResultSet");
         return book;
     }
 
@@ -116,6 +125,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void updateBook(Book book, int book_id) {
+        logger.info("Start updateBook");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_BOOK);
@@ -135,6 +145,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished updateBook");
     }
 
     /**
@@ -145,6 +156,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public List<Book> getListBookByGenre(String genre) {
+        logger.info("Start getListBookByGenre");
         List<Book> bookList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -159,6 +171,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getListBookByGenre");
         return bookList;
     }
 
@@ -170,6 +183,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public List<Book> getListBookByGenreSorted(String genre, String sortBy) {
+        logger.info("Start getListBookByGenreSorted");
         List<Book> bookList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -184,6 +198,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getListBookByGenreSorted");
         return bookList;
     }
 
@@ -195,6 +210,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public int getBookIdByName(String nameOfBook) {
+        logger.info("Start getBookIdByName");
         int id = 0;
         try {
             connection = DBManager.getConnection();
@@ -209,6 +225,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getBookIdByName");
         return id;
     }
 
@@ -220,6 +237,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public Book getBookByName(String nameOfBook) {
+        logger.info("Start getBookByName");
         Book book = new Book();
         try {
             connection = DBManager.getConnection();
@@ -234,6 +252,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getBookByName");
         return book;
     }
 
@@ -244,6 +263,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void reduceBookAvailabilityById(int id_book) {
+        logger.info("Start reduceBookAvailabilityById");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_BOOK_SET_AVAILABILITY_MINUS);
@@ -254,6 +274,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished reduceBookAvailabilityById");
     }
 
     /**
@@ -263,6 +284,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void increaseBookAvailabilityById(int id_book) {
+        logger.info("Start increaseBookAvailabilityById");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_BOOK_SET_AVAILABILITY_PLUS);
@@ -273,6 +295,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished increaseBookAvailabilityById");
     }
 
     /**
@@ -282,6 +305,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void deleteBook(int book_id) {
+        logger.info("Start deleteBook");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.DELETE_BOOK);
@@ -292,6 +316,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished deleteBook");
     }
 
     /**
@@ -301,6 +326,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public List<Book> getListBook() {
+        logger.info("Start getListBook");
         List<Book> bookList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -314,6 +340,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getListBook");
         return bookList;
     }
 
@@ -325,6 +352,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public int getAvailabilityByBookId(int book_id) {
+        logger.info("Start getAvailabilityByBookId");
         int availability = 0;
         try {
             connection = DBManager.getConnection();
@@ -339,6 +367,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getAvailabilityByBookId");
         return availability;
     }
 
@@ -349,6 +378,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void updateBookOrderByNameOfBook(String nameOfBook) {
+        logger.info("Start updateBookOrderByNameOfBook");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_BOOK_SET_ORDER_BY_NAME_OF_BOOK);
@@ -359,6 +389,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished updateBookOrderByNameOfBook");
     }
 
     /**
@@ -369,6 +400,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public String getNameOfBookById(int bookId) {
+        logger.info("Start getNameOfBookById");
         String nameOfBook = "";
         try {
             connection = DBManager.getConnection();
@@ -383,6 +415,7 @@ public class BookDAOImpl implements BookDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getNameOfBookById");
         return nameOfBook;
     }
 
@@ -391,6 +424,7 @@ public class BookDAOImpl implements BookDAO {
      */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
+        logger.info("Start closing");
         try {
             if (rs != null) {
                 rs.close();
@@ -400,5 +434,6 @@ public class BookDAOImpl implements BookDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished closing");
     }
 }

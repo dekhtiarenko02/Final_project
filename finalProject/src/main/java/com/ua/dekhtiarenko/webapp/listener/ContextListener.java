@@ -6,6 +6,7 @@ import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.services.*;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -18,8 +19,11 @@ import javax.servlet.ServletContextListener;
 
 public class ContextListener implements ServletContextListener {
 
+    private final Logger logger = Logger.getLogger(ContextListener.class);
+
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
+        logger.info("Start ContextListener");
         ServletContext servletContext = servletContextEvent.getServletContext();
         BookDAOImpl bookDAOImpl = new BookDAOImpl();
         SubscriptionBookDAOImpl subscriptionBookDAOImpl = new SubscriptionBookDAOImpl();
@@ -70,6 +74,7 @@ public class ContextListener implements ServletContextListener {
         servletContext.setAttribute("subscriptionBookDAO", subscriptionBookDAOImpl);
         servletContext.setAttribute("subscriptionDAO", subscriptionDAOImpl);
         servletContext.setAttribute("userDAO", userDAOImpl);
+        logger.info("Finished ContextListener");
     }
 
     @Override

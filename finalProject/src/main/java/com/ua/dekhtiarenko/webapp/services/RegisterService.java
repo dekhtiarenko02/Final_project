@@ -4,6 +4,7 @@ import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,7 +18,10 @@ import java.io.IOException;
 
 public class RegisterService {
 
+    private static final Logger log = Logger.getLogger(RegisterService.class);
+
     public void registration(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start RegisterService");
 
         ServletContext servletContext = req.getServletContext();
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
@@ -44,9 +48,13 @@ public class RegisterService {
             user.setId(userDAOImpl.getUserIdByEmail(user.getEmail()));
             subscriptionDAOImpl.insertSubscription(user);
             req.getRequestDispatcher("MainPageServlet").forward(req, resp);
+
+            log.info("User's email==> " + email + " name==> " + name + " surname==> "
+                    + surname + " password==> " + password);
+
         } else {
             req.getRequestDispatcher("/error.jsp").forward(req, resp);
         }
-
+        log.info("RegisterService finished");
     }
 }

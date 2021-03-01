@@ -2,6 +2,7 @@ package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.services.AdminActionsService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +17,8 @@ import java.io.IOException;
 
 public class AdminActionsServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(AdminActionsServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -23,6 +26,7 @@ public class AdminActionsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start AdminActionsServlet");
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
@@ -30,5 +34,6 @@ public class AdminActionsServlet extends HttpServlet {
 
         AdminActionsService adminActionsService = (AdminActionsService) servletContext.getAttribute("adminActionsService");
         adminActionsService.adminActions(req, resp);
+        log.info("Finished AdminActionsServlet");
     }
 }

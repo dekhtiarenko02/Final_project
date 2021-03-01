@@ -1,11 +1,13 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.ReturnServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,8 +22,10 @@ import java.util.List;
 
 public class ReturnService {
 
-    public void returnService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private final Logger logger = Logger.getLogger(ReturnService.class);
 
+    public void returnService(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.info("Start ReturnService");
         ServletContext servletContext = req.getServletContext();
 
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
@@ -52,5 +56,6 @@ public class ReturnService {
         req.setAttribute("bookAvailability", bookAvailability);
         req.setAttribute("id", req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);
+        logger.info("Finished ReturnService");
     }
 }

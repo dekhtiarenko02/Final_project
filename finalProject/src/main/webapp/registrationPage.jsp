@@ -53,7 +53,7 @@
                          placeholder="Your Password(Min 6 Chars)"
                          name="Password">
                       </div>
-                          <input class ="dws-submit" type="submit" value = "Confirm">
+                      <button class="dws-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
                 </form>
         </div>
             <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

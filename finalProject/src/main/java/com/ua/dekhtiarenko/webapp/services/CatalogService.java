@@ -1,7 +1,9 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.CatalogServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,14 +20,16 @@ import java.util.Objects;
 
 public class CatalogService {
 
-    public void catalog(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(CatalogService.class);
 
+    public void catalog(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start CatalogService");
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         String genre = req.getParameter("genre");
         String sort = req.getParameter("Sort");
         List<Book> bookList = bookDAOImpl.getListBookByGenre(genre);
-
+        log.info("Catalog was sorted by " + sort);
         if (Objects.equals(sort, "-")) {
             bookList = bookDAOImpl.getListBookByGenre(genre);
         } else if (Objects.equals(sort, "Name of book") || Objects.equals(sort, "Названию")) {
@@ -74,5 +78,6 @@ public class CatalogService {
         req.setAttribute("bookList", bookList);
         req.setAttribute("genre", genre);
         req.getRequestDispatcher("/catalogPage.jsp").forward(req, resp);
+        log.info("Finished CatalogService");
     }
 }

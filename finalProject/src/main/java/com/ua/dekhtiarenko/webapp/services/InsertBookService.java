@@ -1,8 +1,10 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.InsertBookServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +18,10 @@ import java.io.IOException;
 
 public class InsertBookService {
 
-    public void insertBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(InsertBookService.class);
 
+    public void insertBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start InsertBookService");
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         Validation validation = (Validation) servletContext.getAttribute("validation");
@@ -48,8 +52,10 @@ public class InsertBookService {
             book.setAvailability(Integer.parseInt(req.getParameter("availability")));
             book.setNumberOfPages(Integer.parseInt(req.getParameter("numberOfPages")));
             bookDAOImpl.insertBook(book);
+            log.info("Book has been inserted");
         }
 
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
+        log.info("Finished InsertBookService");
     }
 }

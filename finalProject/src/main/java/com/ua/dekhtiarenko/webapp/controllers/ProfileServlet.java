@@ -1,7 +1,9 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
+import com.ua.dekhtiarenko.webapp.services.OrderService;
 import com.ua.dekhtiarenko.webapp.services.ProfileService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +18,8 @@ import java.io.IOException;
 
 public class ProfileServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(ProfileServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -23,6 +27,7 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start ProfileServlet");
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
@@ -30,7 +35,7 @@ public class ProfileServlet extends HttpServlet {
 
         ProfileService profileService = (ProfileService) servletContext.getAttribute("profileService");
         profileService.profile(req, resp);
+        log.info("Finished ProfileServlet");
     }
-
 }
 

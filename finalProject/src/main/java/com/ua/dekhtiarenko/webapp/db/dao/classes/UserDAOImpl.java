@@ -4,15 +4,15 @@ import com.ua.dekhtiarenko.webapp.db.connection.DBManager;
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.UserDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import org.apache.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
@@ -20,6 +20,7 @@ import java.util.logging.Logger;
 
 public class UserDAOImpl implements UserDAO {
 
+    private final Logger logger = Logger.getLogger(UserDAOImpl.class);
     private static Connection connection = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet rs = null;
@@ -31,6 +32,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void insertUser(User user) {
+        logger.info("Start insertUser");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.INSERT_INTO_USER);
@@ -47,6 +49,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished insertUser");
     }
 
     /**
@@ -57,6 +60,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public User getUserById(int id) {
+        logger.info("Start getUserById");
         User user = new User();
         try {
             connection = DBManager.getConnection();
@@ -78,6 +82,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getUserById");
         return user;
     }
 
@@ -88,6 +93,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void updateUser(User user) {
+        logger.info("Start updateUser");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_USER_NAME_SURNAME_PASS);
@@ -101,6 +107,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished updateUser");
     }
 
     /**
@@ -110,6 +117,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void updateUser(User user, int user_id) {
+        logger.info("Start updateUser");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.UPDATE_USER);
@@ -125,6 +133,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished updateUser");
     }
 
     /**
@@ -134,6 +143,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public List<User> getUserList() {
+        logger.info("Start getUserList");
         List<User> userList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -147,6 +157,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getUserList");
         return userList;
     }
 
@@ -158,6 +169,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public User readingResultSet(ResultSet resultSet) {
+        logger.info("Start readingResultSet");
         User user = new User();
         try {
             user.setId(resultSet.getInt("id_user"));
@@ -171,6 +183,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished readingResultSet");
         return user;
     }
 
@@ -182,6 +195,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public int getUserIdByEmail(String email) {
+        logger.info("Start getUserIdByEmail");
         int id = 0;
         try {
             connection = DBManager.getConnection();
@@ -196,6 +210,7 @@ public class UserDAOImpl implements UserDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getUserIdByEmail");
         return id;
     }
 
@@ -207,6 +222,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public boolean exists(String name, String pass) {
+        logger.info("Start exists");
         boolean status = false;
         try {
             connection = DBManager.getConnection();
@@ -218,6 +234,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (Exception e) {
             Logger.getLogger(e.getMessage());
         }
+        logger.info("Finished exists");
         return status;
     }
 
@@ -226,6 +243,7 @@ public class UserDAOImpl implements UserDAO {
      */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
+        logger.info("Start closing");
         try {
             if (rs != null) {
                 rs.close();
@@ -235,5 +253,6 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished closing");
     }
 }

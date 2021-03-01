@@ -1,8 +1,10 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.ChangeUserServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +18,10 @@ import java.io.IOException;
 
 public class ChangeUserService {
 
-    public void changeUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(ChangeUserService.class);
 
+    public void changeUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start ChangeUserService");
         ServletContext servletContext = req.getServletContext();
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
         User user = new User();
@@ -41,9 +45,11 @@ public class ChangeUserService {
             user.setBlocked(blocked);
             int user_id = Integer.parseInt(req.getParameter("user_id"));
             userDAOImpl.updateUser(user, user_id);
+            log.info("User has been updated");
             req.setAttribute("user", user);
         }
 
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
+        log.info("Finished ChangeUserService");
     }
 }

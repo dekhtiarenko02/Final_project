@@ -1,8 +1,10 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.EditProfileServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +18,10 @@ import java.io.IOException;
 
 public class EditProfileService {
 
-    public void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(EditProfileService.class);
 
+    public void editProfile(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start EditProfileService");
         ServletContext servletContext = req.getServletContext();
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
         User user = userDAOImpl.getUserById(Integer.parseInt(req.getParameter("id")));
@@ -32,8 +36,10 @@ public class EditProfileService {
             user.setSurname(req.getParameter("Surname"));
             user.setPassword(req.getParameter("Password"));
             userDAOImpl.updateUser(user);
+            log.info("User has been updated");
         }
 
         req.getRequestDispatcher("MainPageServlet").forward(req, resp);
+        log.info("Finished EditProfileService");
     }
 }

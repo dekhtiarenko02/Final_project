@@ -1,11 +1,13 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.ArrangeServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,8 +22,10 @@ import java.util.List;
 
 public class ArrangeService {
 
-    public void arrange(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(ArrangeService.class);
 
+    public void arrange(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start ArrangeService");
         ServletContext servletContext = req.getServletContext();
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
@@ -51,5 +55,6 @@ public class ArrangeService {
         req.setAttribute("bookAvailability", bookAvailability);
         req.setAttribute("id", req.getParameter("id"));
         req.getRequestDispatcher("ProfileServlet").forward(req, resp);
+        log.info("Finished ArrangeService");
     }
 }

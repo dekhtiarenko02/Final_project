@@ -1,8 +1,10 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.ChangeBookServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.Book;
 import com.ua.dekhtiarenko.webapp.validation.Validation;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,8 +18,10 @@ import java.io.IOException;
 
 public class ChangeBookService {
 
-    public void changeBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    private static final Logger log = Logger.getLogger(ChangeBookService.class);
 
+    public void changeBook(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start ChangeBookService");
         ServletContext servletContext = req.getServletContext();
         BookDAOImpl bookDAOImpl = (BookDAOImpl) servletContext.getAttribute("bookDAO");
         Book book = new Book();
@@ -56,9 +60,11 @@ public class ChangeBookService {
             book.setOrder(isOrder);
             int book_id = Integer.parseInt(req.getParameter("book_id"));
             bookDAOImpl.updateBook(book, book_id);
+            log.info("Book has been updated");
             req.setAttribute("book", book);
         }
 
         req.getRequestDispatcher("AdminActionsServlet").forward(req, resp);
+        log.info("Finished ChangeBookService");
     }
 }

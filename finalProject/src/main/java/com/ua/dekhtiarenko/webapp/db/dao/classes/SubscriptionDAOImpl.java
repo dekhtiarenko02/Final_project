@@ -5,6 +5,7 @@ import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
 import com.ua.dekhtiarenko.webapp.db.dao.interfaces.SubscriptionDAO;
 import com.ua.dekhtiarenko.webapp.db.entity.Subscription;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * Created by Dekhtiarenko-Daniil on 25.02.2021.
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 
 public class SubscriptionDAOImpl implements SubscriptionDAO {
 
+    private final Logger logger = Logger.getLogger(SubscriptionDAOImpl.class);
     private Connection connection = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
@@ -31,6 +33,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public void insertSubscription(User user) {
+        logger.info("Start insertSubscription");
         try {
             connection = DBManager.getConnection();
             preparedStatement = connection.prepareStatement(Request.INSERT_INTO_SUBSCRIPTION);
@@ -42,6 +45,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished insertSubscription");
     }
 
     /**
@@ -52,6 +56,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public int getPenaltyFromSubscriptionByUserId(int userId) {
+        logger.info("Start getPenaltyFromSubscriptionByUserId");
         int penalty = 0;
         try {
             connection = DBManager.getConnection();
@@ -66,6 +71,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getPenaltyFromSubscriptionByUserId");
         return penalty;
     }
 
@@ -76,6 +82,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public List<Subscription> getSubscriptionList() {
+        logger.info("Start getSubscriptionList");
         List<Subscription> subscriptionList = new ArrayList<>();
         try {
             connection = DBManager.getConnection();
@@ -89,6 +96,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getSubscriptionList");
         return subscriptionList;
     }
 
@@ -100,6 +108,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public Subscription readingResultSet(ResultSet resultSet) {
+        logger.info("Start readingResultSet");
         Subscription subscription = new Subscription();
         try {
             subscription.setId(resultSet.getInt("id_subscription"));
@@ -108,6 +117,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished readingResultSet");
         return subscription;
     }
 
@@ -119,6 +129,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public int getSubscriptionIdByUserId(int userId) {
+        logger.info("Start getSubscriptionIdByUserId");
         int id = 0;
         try {
             connection = DBManager.getConnection();
@@ -133,6 +144,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } finally {
             closing(connection, preparedStatement, rs);
         }
+        logger.info("Finished getSubscriptionIdByUserId");
         return id;
     }
 
@@ -141,6 +153,7 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
      */
     @Override
     public void closing(Connection connection, PreparedStatement preparedStatement, ResultSet rs) {
+        logger.info("Start closing");
         try {
             if (rs != null) {
                 rs.close();
@@ -150,5 +163,6 @@ public class SubscriptionDAOImpl implements SubscriptionDAO {
         } catch (SQLException sqlException) {
             Logger.getLogger(sqlException.getMessage());
         }
+        logger.info("Finished closing");
     }
 }

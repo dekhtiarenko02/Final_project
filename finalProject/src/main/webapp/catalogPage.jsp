@@ -32,7 +32,6 @@
              </nav>
             <div class="books_catalog_overlay"> </div>
      </div>
-
         <div class = "header">
             <nav id="languageHeader">
               <a href="LanguageServlet?id=${idVal}&language=en"><img class="usaFlag" src="images/unitedStates.png"></a>
@@ -42,7 +41,7 @@
         <form action ="SearchServlet?id=${idVal}" method = "post">
             <div>
                 <input type="text" class="search" name="Search" placeholder="Search">
-                <input class ="search-submit" type="submit" value="Confirm">
+                <button class="search-submit" type="submit"><label><fmt:message key="confirm"/></label></button>
             </div>
         </form>
                 <a href="MainPageServlet?id=${idVal}"><img class="logo2" src="images/logotype.png" width="64"

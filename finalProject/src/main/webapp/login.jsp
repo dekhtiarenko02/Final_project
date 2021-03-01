@@ -33,7 +33,6 @@
 <div class="container2">
     <img class="avatar"  src="images/avatarR.png">
       <form action ="LogInServlet" method = "post">
-
             <div class="dws-input">
                 <img class="reg_images" src="images/email.png">
                 <input type = "email" name = "Email" placeholder="Your Email">
@@ -45,7 +44,7 @@
                placeholder="Your Password"
                name="Password">
             </div>
-                <input class ="dws-submit changeOnClick" type="submit" value = "Confirm">
+            <button class="dws-submit changeOnClick" type="submit"><label><fmt:message key="confirm"/></label></button>
         </form>
     </div>
            <script type="text/javascript" src="${pageContext.request.contextPath}/js/script.js"></script>

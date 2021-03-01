@@ -1,7 +1,9 @@
 package com.ua.dekhtiarenko.webapp.controllers;
 
 import com.ua.dekhtiarenko.webapp.db.dao.constant.Request;
+import com.ua.dekhtiarenko.webapp.services.ChangeUserService;
 import com.ua.dekhtiarenko.webapp.services.DeleteBookService;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,6 +18,8 @@ import java.io.IOException;
 
 public class DeleteBookServlet extends HttpServlet {
 
+    private static final Logger log = Logger.getLogger(DeleteBookServlet.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -23,6 +27,7 @@ public class DeleteBookServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info("Start DeleteBookServlet");
         req.setCharacterEncoding(Request.CP_1251);
         resp.setContentType(Request.TEXT_HTML);
 
@@ -30,5 +35,6 @@ public class DeleteBookServlet extends HttpServlet {
 
         DeleteBookService deleteBookService = (DeleteBookService) servletContext.getAttribute("deleteBookService");
         deleteBookService.deleteBook(req, resp);
+        log.info("Finished DeleteBookServlet");
     }
 }

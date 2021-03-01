@@ -1,11 +1,13 @@
 package com.ua.dekhtiarenko.webapp.services;
 
+import com.ua.dekhtiarenko.webapp.controllers.ProfileServlet;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.BookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionBookDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.SubscriptionDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.dao.classes.UserDAOImpl;
 import com.ua.dekhtiarenko.webapp.db.entity.SubscriptionBook;
 import com.ua.dekhtiarenko.webapp.db.entity.User;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -23,8 +25,10 @@ import java.util.concurrent.TimeUnit;
 
 public class ProfileService {
 
-    public void profile(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+    private static final Logger log = Logger.getLogger(ProfileService.class);
 
+    public void profile(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        log.info("Start ProfileService");
         ServletContext servletContext = req.getServletContext();
         UserDAOImpl userDAOImpl = (UserDAOImpl) servletContext.getAttribute("userDAO");
         SubscriptionBookDAOImpl subscriptionBookDAOImpl = (SubscriptionBookDAOImpl) servletContext.getAttribute("subscriptionBookDAO");
@@ -50,6 +54,7 @@ public class ProfileService {
             date.setTime(date.getTime() + TimeUnit.DAYS.toMillis(7));
 
             if (dateNow.after(date)) {
+                log.info("SetAttribute penalty");
                 req.setAttribute("penalty", subscriptionDAOImpl.getPenaltyFromSubscriptionByUserId(user.getId()) + 3);
             } else {
                 req.setAttribute("penalty", subscriptionDAOImpl.getPenaltyFromSubscriptionByUserId(user.getId()));
@@ -59,5 +64,6 @@ public class ProfileService {
         }
         req.setAttribute("user", user);
         req.getRequestDispatcher("/profile.jsp").forward(req, resp);
+        log.info("Finished ProfileService");
     }
 }
